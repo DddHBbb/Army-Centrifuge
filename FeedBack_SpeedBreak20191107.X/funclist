@@ -1,0 +1,22 @@
+_systemOSC: CODE, 1811 0 5
+_InitCn: CODE, 1804 0 7
+_RBCN_int: CODE, 1626 0 34
+_com: CODE, 1465 0 47
+_InitTimer1: CODE, 1748 0 18
+_InitTimer2: CODE, 1782 0 14
+_main: CODE, 21 0 479
+_InitDevices: CODE, 1512 0 41
+_TMR1_int: CODE, 979 0 193
+___lwdiv: CODE, 1264 0 80
+_InitialiseADC: CODE, 1685 0 22
+_ReadADC: CODE, 1344 0 69
+_write_IIC: CODE, 755 0 224
+_TMR2_int: CODE, 1660 0 25
+_IIC_init: CODE, 1766 0 16
+_The_Close: CODE, 1590 0 36
+_Delay: CODE, 1728 0 20
+_MotorClose: CODE, 500 0 255
+_Motor_adjusting_speed: CODE, 1172 0 92
+_PortInit: CODE, 1707 0 21
+_delaynms: CODE, 1413 0 52
+Total: 1750

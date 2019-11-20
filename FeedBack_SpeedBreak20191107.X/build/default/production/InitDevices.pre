@@ -1646,4 +1646,6 @@ PEIE = 1;
 TMR1ON=1;
 GIE=1;
 
+WDTCON = 0x12;
+
 }

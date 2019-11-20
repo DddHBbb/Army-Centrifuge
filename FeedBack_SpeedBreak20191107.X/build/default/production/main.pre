@@ -1558,8 +1558,7 @@ void main(void)
 {
 unsigned char i;
 InitDevices();
-
-WDTCON = 0x12;
+write_IIC(0x00,0x00 );
 while(1)
 {
 
@@ -1614,9 +1613,10 @@ Onekey_Flag = 0;
 
 if((PORTAbits.RA1 == 0) && (Not_two == 1))
 {
-WDTCONbits.SWDTEN = 1;
+
 if(Key_Run == 1)
 {
+WDTCONbits.SWDTEN = 1;
 asm("clrwdt");
 while(Initial_Flag == 0)
 {

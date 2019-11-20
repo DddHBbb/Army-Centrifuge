@@ -2692,7 +2692,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;InitDevices.c: 128: GIE=1;
 "128
 [e = _GIE -> -> 1 `i `b ]
-[; ;InitDevices.c: 130: }
+[; ;InitDevices.c: 130: WDTCON = 0x12;
 "130
+[e = _WDTCON -> -> 18 `i `uc ]
+[; ;InitDevices.c: 132: }
+"132
 [e :UE 146 ]
 }

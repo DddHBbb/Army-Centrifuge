@@ -5,7 +5,7 @@ void interrupt com(void)
 { 
     if(RBIF)
     { 
-       RBCN_int(); 
+		RBCN_int(); 
     }
     if(TMR2IF)
     {
@@ -13,12 +13,12 @@ void interrupt com(void)
     } 
     if(TMR1IF)
     {
-       TMR1_int();  
+		TMR1_int();  
     }
-//       if(ADIF != 0)
-//    {
-//       get1_ad();  
-//    }
+	//       if(ADIF != 0)
+	//    {
+	//       get1_ad();  
+	//    }
     
 }
 extern unsigned char Start_Flag;
@@ -53,47 +53,47 @@ void  TMR1_int(void)                  //50ms
     TMR1IF =0;                //clear interrupt flag
     TMR1=15536; 
     //电池状态检测 
-//     for(i=0;i<10;i++)
-//     {
-//          ADC_Val += ReadADC(3);
-//     }
-//     ADC_Val/=10;
-//     if((ADC_Val< 530)) 
-//        {
-//           BAT_LED_times++;
-//           if(BAT_LED_times == 20)
-//           {
-//            PORTBbits.RB5 = ~PORTBbits.RB5;
-//            BAT_LED_times=0;
-//           }
-//        }
-//        else if(ADC_Val > 595) 
-//        {
-//            BAT_LED_OFF;
-//        } 
-//        else  if((ADC_Val < 565) && (ADC_Val> 540))
-//        {
-//            BAT_LED_ON;
-//        }
-
-  //启停开关检测
+	//     for(i=0;i<10;i++)
+	//     {
+	//          ADC_Val += ReadADC(3);
+	//     }
+	//     ADC_Val/=10;
+	//     if((ADC_Val< 530)) 
+	//        {
+	//           BAT_LED_times++;
+	//           if(BAT_LED_times == 20)
+	//           {
+	//            PORTBbits.RB5 = ~PORTBbits.RB5;
+	//            BAT_LED_times=0;
+	//           }
+	//        }
+	//        else if(ADC_Val > 595) 
+	//        {
+	//            BAT_LED_OFF;
+	//        } 
+	//        else  if((ADC_Val < 565) && (ADC_Val> 540))
+	//        {
+	//            BAT_LED_ON;
+	//        }
+	
+	//启停开关检测
     if((PORTAbits.RA1 == 0) &&  (Not_two == 1) && (Forbid_input == 0))
     {
-    if(PORTBbits.RB1 == 1)   Key_Up = 0;
-    if((PORTBbits.RB1 == 0) && (Key_Up == 0))
-    {
-        Key_Run_times++;
-        if(Key_Run_times == 40) 
-        {
-            Key_Run++;
-            Key_Run_times = 0;
-            Key_Up = 1;
-        }
-    } else   Key_Run_times = 0;  
+		if(PORTBbits.RB1 == 1)   Key_Up = 0;
+		if((PORTBbits.RB1 == 0) && (Key_Up == 0))
+		{
+			Key_Run_times++;
+			if(Key_Run_times == 40) 
+			{
+				Key_Run++;
+				Key_Run_times = 0;
+				Key_Up = 1;
+			}
+		} else   Key_Run_times = 0;  
     }
     //一键开关检测
-     if(Work_Flag == 0)
-     {
+	if(Work_Flag == 0)
+	{
         if(PORTCbits.RC1 == 1)   Onekey_Key_Up = 0;
         if((PORTCbits.RC1 == 0) && (Onekey_Key_Up == 0))
         {
@@ -105,13 +105,13 @@ void  TMR1_int(void)                  //50ms
                 Onekey_Key_Up = 1;
             }
         } else   Onekey_times = 0;
-     }
-     //电机工作时间设置
+	}
+	//电机工作时间设置
     if(Open_Cover_Flag == 1)
     {
-         Open_Cover_times++;
+		Open_Cover_times++;
     }
-   //速度LED显示
+	//速度LED显示
     if(Count_Flag == 1)
     {
         Flag_working_time++;       
@@ -121,13 +121,13 @@ void  TMR1_int(void)                  //50ms
             Stop_Flag = 1; 
             Flag_working_time = 0; 
         }    
-         if(Flag_working_time > 400) 
+		if(Flag_working_time > 400) 
         {
             Speed_LED_times++;
             if(Speed_LED_times == 20)
             {
-            PORTBbits.RB0 = ~ PORTBbits.RB0;
-            Speed_LED_times = 0;
+				PORTBbits.RB0 = ~ PORTBbits.RB0;
+				Speed_LED_times = 0;
             }
         }else    Motor_LED_ON;
     } else  Flag_working_time = 0; 
@@ -151,11 +151,11 @@ void RBCN_int(void)
         TMR2ON=0; //定时器2停止计数
         Flag_FG_Period=1;      //1个周期标志位置1    
         Flag_FG_Period_time=FG_Period_time;   
-         FG_Period_time=0; 
+		FG_Period_time=0; 
     }
     else
     {
         TMR2ON=1;
     }
-
+	
 }

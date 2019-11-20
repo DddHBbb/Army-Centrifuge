@@ -35,17 +35,17 @@ void PortInit(void)
     PORTC = 0X00;
     TRISC = 0XE2;    // 7 6 5 1 输入C
     ANSELH = 0x00;
-//    ANSEL = 0x19;    // 5  3  0  ADC A
-//    WPUB = 0xf8;   //弱上拉功能设置
+	//    ANSEL = 0x19;    // 5  3  0  ADC A
+	//    WPUB = 0xf8;   //弱上拉功能设置
 }
 
 void InitialiseADC(void)
 {
-//     TRISAbits.TRISA6 = 0;
-//    TRISBbits.TRISB1 = 1;
-//    TRISBbits.TRISB4 = 1;
+	//     TRISAbits.TRISA6 = 0;
+	//    TRISBbits.TRISB1 = 1;
+	//    TRISBbits.TRISB4 = 1;
     ANSEL = 0x08;  //analog   AN3
-  //  ADCON0 = 0x8F;
+	//  ADCON0 = 0x8F;
     ADCON1 = 0x80;  
     ADRESL = 0;	 
     ADRESH = 0;
@@ -70,9 +70,9 @@ void IIC_init(void)
     SSPSTAT=0x80;
     SSPCON=0x28;    //CKP高电平空闲，因为I2C必须加上拉电阻，所以设定高电平空闲
     SSPCON2=0;      //开始设为0，在读写的过程中相应改变其中的寄存器
-//    SSPADD=0x09;   //主频是4M时设置波特率100KHz，时钟=Fosc/[4*(SSPADD+1)
-  // I2C波特率=Fosc/(4*(SSPADD+1))
-  // SSPADD=[(Fosc/(BandRate*4)]-1
+	//    SSPADD=0x09;   //主频是4M时设置波特率100KHz，时钟=Fosc/[4*(SSPADD+1)
+	// I2C波特率=Fosc/(4*(SSPADD+1))
+	// SSPADD=[(Fosc/(BandRate*4)]-1
     SSPADD=0x13;    //主频是8M时设置波特率100KHz，时钟=Fosc/[4*(SSPADD+1)
 }
 
@@ -89,7 +89,7 @@ void InitTimer1(void)     //定时50ms
     TMR1CS = 0;              //Timer1 使用内部时钟,时钟源的频率为 FOSC/4    2MHz    
     T1CONbits.T1CKPS0=1;    //clock pre_div 1:2    1MHz   1us 
     T1CONbits.T1CKPS1=0;
-//    TMR1=50000;             //1us*(65536-50000)=15ms     
+	//    TMR1=50000;             //1us*(65536-50000)=15ms     
     TMR1=15536;             //1us*(65536-15536)=50ms 
     TMR1IE=1;
     TMR1IF = 0;
@@ -108,9 +108,9 @@ void InitTimer2(void)   //定时100us
 
 void InitCn(void)
 {
-   IOCB=0X10;       //电平变化中断选择位RB4
-   RBIE=1;
-   RBIF=0;
+	IOCB=0X10;       //电平变化中断选择位RB4
+	RBIE=1;
+	RBIF=0;
 }
 
 void InitDevices(void)
@@ -126,7 +126,7 @@ void InitDevices(void)
     PEIE = 1;
     TMR1ON=1; 
     GIE=1; 
-      //WDTCON = 0x17;//2048ms
+	//WDTCON = 0x17;//2048ms
     WDTCON = 0x12;//512ms  
-
+	
 }

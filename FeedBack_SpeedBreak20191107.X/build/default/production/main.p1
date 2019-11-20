@@ -1268,6 +1268,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [p mainexit ]
 "38 GlobalVar.h
 [v _InitDevices `(v  0 ef ]
+"28 GlobalVar.h
+[v _write_IIC `(v  0 ef2`uc`uc ]
 "12 main.c
 [v _Key_Run `uc  0 e ]
 "21 ADC.h
@@ -1276,8 +1278,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _delaynms `(v  0 ef1`ui ]
 "13 main.c
 [v _Onekey_Flag `uc  0 e ]
-"28 GlobalVar.h
-[v _write_IIC `(v  0 ef2`uc`uc ]
 "35 GlobalVar.h
 [v _Motor_adjusting_speed `(v  0 ef ]
 "15 main.c
@@ -2559,223 +2559,223 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 30: InitDevices();
 "30
 [e ( _InitDevices ..  ]
-[; ;main.c: 32: WDTCON = 0x12;
+[; ;main.c: 31: write_IIC(0x00,0x00 );
+"31
+[e ( _write_IIC (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+[; ;main.c: 32: while(1)
 "32
-[e = _WDTCON -> -> 18 `i `uc ]
-[; ;main.c: 33: while(1)
-"33
 [e :U 139 ]
-[; ;main.c: 34: {
-"34
+[; ;main.c: 33: {
+"33
 {
-[; ;main.c: 36: if(PORTAbits.RA5 == 1) {PORTBbits.RB2 = 1;asm ("NOP");}
-"36
+[; ;main.c: 35: if(PORTAbits.RA5 == 1) {PORTBbits.RB2 = 1;asm ("NOP");}
+"35
 [e $ ! == -> . . _PORTAbits 0 5 `i -> 1 `i 141  ]
 {
 [e = . . _PORTBbits 0 2 -> -> 1 `i `uc ]
 [; NOP ;#
 }
 [e $U 142  ]
-"37
+"36
 [e :U 141 ]
-[; ;main.c: 37: else {PORTBbits.RB2 = 0;asm ("NOP");}
+[; ;main.c: 36: else {PORTBbits.RB2 = 0;asm ("NOP");}
 {
 [e = . . _PORTBbits 0 2 -> -> 0 `i `uc ]
 [; NOP ;#
 }
 [e :U 142 ]
-[; ;main.c: 39: if((Count_Flag == 0) && (Work_Flag == 1)) {PORTBbits.RB0 = 1;asm ("NOP");}
-"39
+[; ;main.c: 38: if((Count_Flag == 0) && (Work_Flag == 1)) {PORTBbits.RB0 = 1;asm ("NOP");}
+"38
 [e $ ! && == -> _Count_Flag `i -> 0 `i == -> _Work_Flag `i -> 1 `i 143  ]
 {
 [e = . . _PORTBbits 0 0 -> -> 1 `i `uc ]
 [; NOP ;#
 }
 [e $U 144  ]
-"40
+"39
 [e :U 143 ]
-[; ;main.c: 40: else if(Key_Run == 0 ) {PORTBbits.RB0 = 0;asm ("NOP");}
+[; ;main.c: 39: else if(Key_Run == 0 ) {PORTBbits.RB0 = 0;asm ("NOP");}
 [e $ ! == -> _Key_Run `i -> 0 `i 145  ]
 {
 [e = . . _PORTBbits 0 0 -> -> 0 `i `uc ]
 [; NOP ;#
 }
 [e :U 145 ]
-"42
+"41
 [e :U 144 ]
-[; ;main.c: 42: for(i=0;i<70;i++)
+[; ;main.c: 41: for(i=0;i<70;i++)
 {
 [e = _i -> -> 0 `i `uc ]
 [e $ < -> _i `i -> 70 `i 146  ]
 [e $U 147  ]
-"43
-[e :U 146 ]
-[; ;main.c: 43: {
-{
-[; ;main.c: 44: ADC_Val += ReadADC(3);
-"44
-[e =+ _ADC_Val ( _ReadADC (1 -> -> 3 `i `uc ]
-"45
-}
 "42
+[e :U 146 ]
+[; ;main.c: 42: {
+{
+[; ;main.c: 43: ADC_Val += ReadADC(3);
+"43
+[e =+ _ADC_Val ( _ReadADC (1 -> -> 3 `i `uc ]
+"44
+}
+"41
 [e ++ _i -> -> 1 `i `uc ]
 [e $ < -> _i `i -> 70 `i 146  ]
 [e :U 147 ]
-"45
+"44
 }
-[; ;main.c: 45: }
-[; ;main.c: 46: ADC_Val/=70;
-"46
+[; ;main.c: 44: }
+[; ;main.c: 45: ADC_Val/=70;
+"45
 [e =/ _ADC_Val -> -> 70 `uc `ui ]
-[; ;main.c: 47: if((ADC_Val< 510))
-"47
+[; ;main.c: 46: if((ADC_Val< 510))
+"46
 [e $ ! < _ADC_Val -> -> 510 `i `ui 149  ]
-[; ;main.c: 48: {
+[; ;main.c: 47: {
+"47
+{
+[; ;main.c: 48: if(PORTAbits.RA5 == 0)
 "48
-{
-[; ;main.c: 49: if(PORTAbits.RA5 == 0)
-"49
 [e $ ! == -> . . _PORTAbits 0 5 `i -> 0 `i 150  ]
-[; ;main.c: 50: {
-"50
+[; ;main.c: 49: {
+"49
 {
-[; ;main.c: 51: PORTBbits.RB3 = ~PORTBbits.RB3;
-"51
+[; ;main.c: 50: PORTBbits.RB3 = ~PORTBbits.RB3;
+"50
 [e = . . _PORTBbits 0 3 -> ~ -> . . _PORTBbits 0 3 `i `uc ]
-[; ;main.c: 52: delaynms(50);
-"52
+[; ;main.c: 51: delaynms(50);
+"51
 [e ( _delaynms (1 -> -> 50 `i `ui ]
-"53
+"52
 }
 [e :U 150 ]
-"54
+"53
 }
+[; ;main.c: 52: }
 [; ;main.c: 53: }
-[; ;main.c: 54: }
 [e $U 151  ]
-"55
+"54
 [e :U 149 ]
-[; ;main.c: 55: else if(ADC_Val > 595)
+[; ;main.c: 54: else if(ADC_Val > 595)
 [e $ ! > _ADC_Val -> -> 595 `i `ui 152  ]
-[; ;main.c: 56: {
-"56
+[; ;main.c: 55: {
+"55
 {
-[; ;main.c: 57: PORTBbits.RB3 = 0;asm ("NOP");
-"57
+[; ;main.c: 56: PORTBbits.RB3 = 0;asm ("NOP");
+"56
 [e = . . _PORTBbits 0 3 -> -> 0 `i `uc ]
 [; NOP ;#
-"58
+"57
 }
-[; ;main.c: 58: }
+[; ;main.c: 57: }
 [e $U 153  ]
-"59
+"58
 [e :U 152 ]
-[; ;main.c: 59: else if((ADC_Val < 580) && (ADC_Val> 540))
+[; ;main.c: 58: else if((ADC_Val < 580) && (ADC_Val> 540))
 [e $ ! && < _ADC_Val -> -> 580 `i `ui > _ADC_Val -> -> 540 `i `ui 154  ]
-[; ;main.c: 60: {
-"60
+[; ;main.c: 59: {
+"59
 {
-[; ;main.c: 61: if(PORTAbits.RA5 == 1) {PORTBbits.RB3 = 1;asm ("NOP");}
-"61
+[; ;main.c: 60: if(PORTAbits.RA5 == 1) {PORTBbits.RB3 = 1;asm ("NOP");}
+"60
 [e $ ! == -> . . _PORTAbits 0 5 `i -> 1 `i 155  ]
 {
 [e = . . _PORTBbits 0 3 -> -> 1 `i `uc ]
 [; NOP ;#
 }
 [e $U 156  ]
-"62
+"61
 [e :U 155 ]
-[; ;main.c: 62: else {PORTBbits.RB3 = 0;asm ("NOP");}
+[; ;main.c: 61: else {PORTBbits.RB3 = 0;asm ("NOP");}
 {
 [e = . . _PORTBbits 0 3 -> -> 0 `i `uc ]
 [; NOP ;#
 }
 [e :U 156 ]
-"63
+"62
 }
 [e :U 154 ]
-"66
+"65
 [e :U 153 ]
 [e :U 151 ]
-[; ;main.c: 63: }
-[; ;main.c: 66: if((Onekey_Flag == 1) &&(Work_Flag == 0))
+[; ;main.c: 62: }
+[; ;main.c: 65: if((Onekey_Flag == 1) &&(Work_Flag == 0))
 [e $ ! && == -> _Onekey_Flag `i -> 1 `i == -> _Work_Flag `i -> 0 `i 157  ]
-[; ;main.c: 67: {
-"67
+[; ;main.c: 66: {
+"66
 {
-[; ;main.c: 68: PORTCbits.RC0= 1;asm ("NOP");
-"68
+[; ;main.c: 67: PORTCbits.RC0= 1;asm ("NOP");
+"67
 [e = . . _PORTCbits 0 0 -> -> 1 `i `uc ]
 [; NOP ;#
-[; ;main.c: 69: PORTAbits.RA4= 1;asm ("NOP");
-"69
+[; ;main.c: 68: PORTAbits.RA4= 1;asm ("NOP");
+"68
 [e = . . _PORTAbits 0 4 -> -> 1 `i `uc ]
 [; NOP ;#
-[; ;main.c: 70: PORTBbits.RB5 = 1;asm ("NOP");
-"70
+[; ;main.c: 69: PORTBbits.RB5 = 1;asm ("NOP");
+"69
 [e = . . _PORTBbits 0 5 -> -> 1 `i `uc ]
 [; NOP ;#
-[; ;main.c: 71: Not_two = 1;
-"71
+[; ;main.c: 70: Not_two = 1;
+"70
 [e = _Not_two -> -> 1 `i `uc ]
-"72
+"71
 }
 [e :U 157 ]
-[; ;main.c: 72: }
-[; ;main.c: 73: if((Onekey_Flag == 2) && (Work_Flag == 0))
-"73
+[; ;main.c: 71: }
+[; ;main.c: 72: if((Onekey_Flag == 2) && (Work_Flag == 0))
+"72
 [e $ ! && == -> _Onekey_Flag `i -> 2 `i == -> _Work_Flag `i -> 0 `i 158  ]
-[; ;main.c: 74: {
-"74
+[; ;main.c: 73: {
+"73
 {
-[; ;main.c: 75: PORTAbits.RA2 = 1;asm ("NOP");
-"75
+[; ;main.c: 74: PORTAbits.RA2 = 1;asm ("NOP");
+"74
 [e = . . _PORTAbits 0 2 -> -> 1 `i `uc ]
 [; NOP ;#
-[; ;main.c: 76: delaynms(10);
-"76
+[; ;main.c: 75: delaynms(10);
+"75
 [e ( _delaynms (1 -> -> 10 `i `ui ]
-[; ;main.c: 77: PORTAbits.RA2 = 0;asm ("NOP");
-"77
+[; ;main.c: 76: PORTAbits.RA2 = 0;asm ("NOP");
+"76
 [e = . . _PORTAbits 0 2 -> -> 0 `i `uc ]
 [; NOP ;#
-[; ;main.c: 78: PORTCbits.RC0 = 0;asm ("NOP");
-"78
+[; ;main.c: 77: PORTCbits.RC0 = 0;asm ("NOP");
+"77
 [e = . . _PORTCbits 0 0 -> -> 0 `i `uc ]
 [; NOP ;#
-[; ;main.c: 79: PORTAbits.RA4 = 0;asm ("NOP");
-"79
+[; ;main.c: 78: PORTAbits.RA4 = 0;asm ("NOP");
+"78
 [e = . . _PORTAbits 0 4 -> -> 0 `i `uc ]
 [; NOP ;#
-[; ;main.c: 80: PORTBbits.RB5 = 0;asm ("NOP");
-"80
+[; ;main.c: 79: PORTBbits.RB5 = 0;asm ("NOP");
+"79
 [e = . . _PORTBbits 0 5 -> -> 0 `i `uc ]
 [; NOP ;#
-[; ;main.c: 81: Not_two = 0;
-"81
+[; ;main.c: 80: Not_two = 0;
+"80
 [e = _Not_two -> -> 0 `i `uc ]
-[; ;main.c: 82: Onekey_Flag = 0;
-"82
+[; ;main.c: 81: Onekey_Flag = 0;
+"81
 [e = _Onekey_Flag -> -> 0 `i `uc ]
-"83
+"82
 }
 [e :U 158 ]
-[; ;main.c: 83: }
-[; ;main.c: 85: if((PORTAbits.RA1 == 0) && (Not_two == 1))
-"85
+[; ;main.c: 82: }
+[; ;main.c: 84: if((PORTAbits.RA1 == 0) && (Not_two == 1))
+"84
 [e $ ! && == -> . . _PORTAbits 0 1 `i -> 0 `i == -> _Not_two `i -> 1 `i 159  ]
-[; ;main.c: 86: {
-"86
+[; ;main.c: 85: {
+"85
 {
-[; ;main.c: 87: WDTCONbits.SWDTEN = 1;
+[; ;main.c: 87: if(Key_Run == 1)
 "87
-[e = . . _WDTCONbits 0 0 -> -> 1 `i `uc ]
-[; ;main.c: 88: if(Key_Run == 1)
-"88
 [e $ ! == -> _Key_Run `i -> 1 `i 160  ]
-[; ;main.c: 89: {
-"89
+[; ;main.c: 88: {
+"88
 {
+[; ;main.c: 89: WDTCONbits.SWDTEN = 1;
+"89
+[e = . . _WDTCONbits 0 0 -> -> 1 `i `uc ]
 [; ;main.c: 90: asm("clrwdt");
 "90
 [; clrwdt ;#
@@ -2980,7 +2980,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U 173 ]
 }
 [e :U 138 ]
-"33
+"32
 [e $U 139  ]
 [e :U 140 ]
 [; ;main.c: 147: }

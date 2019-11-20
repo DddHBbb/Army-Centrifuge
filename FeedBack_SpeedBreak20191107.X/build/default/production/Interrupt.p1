@@ -1284,6 +1284,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 "45 Interrupt.c
 [v _Onekey_Key_Up `uc  1 e ]
 "47 Interrupt.c
+[v _Forbid_input `uc  1 e ]
+"48 Interrupt.c
 [v _Not_two `uc  0 e ]
 "31 Interrupt.c
 [v _Work_Flag `uc  0 e ]
@@ -2633,295 +2635,300 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ]
 [; ;Interrupt.c: 45: unsigned char Onekey_Key_Up=0;
-[; ;Interrupt.c: 47: extern unsigned char Not_two;
-"49
+"47
+[i _Forbid_input
+-> -> 0 `i `uc
+]
+[; ;Interrupt.c: 47: unsigned char Forbid_input=0;
+[; ;Interrupt.c: 48: extern unsigned char Not_two;
+"50
 [v _TMR1_int `(v  1 ef ]
 {
-[; ;Interrupt.c: 48: void TMR1_int(void)
-[; ;Interrupt.c: 49: {
+[; ;Interrupt.c: 49: void TMR1_int(void)
+[; ;Interrupt.c: 50: {
 [e :U _TMR1_int ]
 [f ]
-"50
+"51
 [v _t `uc  1 a ]
 [v _i `uc  1 a ]
-[; ;Interrupt.c: 50: unsigned char t,i;
-[; ;Interrupt.c: 51: t = TMR1IF;
-"51
-[e = _t -> -> _TMR1IF `i `uc ]
-[; ;Interrupt.c: 52: TMR1IF =0;
+[; ;Interrupt.c: 51: unsigned char t,i;
+[; ;Interrupt.c: 52: t = TMR1IF;
 "52
-[e = _TMR1IF -> -> 0 `i `b ]
-[; ;Interrupt.c: 53: TMR1=15536;
+[e = _t -> -> _TMR1IF `i `uc ]
+[; ;Interrupt.c: 53: TMR1IF =0;
 "53
+[e = _TMR1IF -> -> 0 `i `b ]
+[; ;Interrupt.c: 54: TMR1=15536;
+"54
 [e = _TMR1 -> -> 15536 `i `ui ]
-[; ;Interrupt.c: 79: if((PORTAbits.RA1 == 0) && (Not_two == 1))
-"79
-[e $ ! && == -> . . _PORTAbits 0 1 `i -> 0 `i == -> _Not_two `i -> 1 `i 142  ]
-[; ;Interrupt.c: 80: {
+[; ;Interrupt.c: 80: if((PORTAbits.RA1 == 0) && (Not_two == 1) && (Forbid_input == 0))
 "80
-{
-[; ;Interrupt.c: 81: if(PORTBbits.RB1 == 1) Key_Up = 0;
+[e $ ! && && == -> . . _PORTAbits 0 1 `i -> 0 `i == -> _Not_two `i -> 1 `i == -> _Forbid_input `i -> 0 `i 142  ]
+[; ;Interrupt.c: 81: {
 "81
+{
+[; ;Interrupt.c: 82: if(PORTBbits.RB1 == 1) Key_Up = 0;
+"82
 [e $ ! == -> . . _PORTBbits 0 1 `i -> 1 `i 143  ]
 [e = _Key_Up -> -> 0 `i `uc ]
 [e :U 143 ]
-[; ;Interrupt.c: 82: if((PORTBbits.RB1 == 0) && (Key_Up == 0))
-"82
-[e $ ! && == -> . . _PORTBbits 0 1 `i -> 0 `i == -> _Key_Up `i -> 0 `i 144  ]
-[; ;Interrupt.c: 83: {
+[; ;Interrupt.c: 83: if((PORTBbits.RB1 == 0) && (Key_Up == 0))
 "83
-{
-[; ;Interrupt.c: 84: Key_Run_times++;
+[e $ ! && == -> . . _PORTBbits 0 1 `i -> 0 `i == -> _Key_Up `i -> 0 `i 144  ]
+[; ;Interrupt.c: 84: {
 "84
-[e ++ _Key_Run_times -> -> 1 `i `uc ]
-[; ;Interrupt.c: 85: if(Key_Run_times == 40)
-"85
-[e $ ! == -> _Key_Run_times `i -> 40 `i 145  ]
-[; ;Interrupt.c: 86: {
-"86
 {
-[; ;Interrupt.c: 87: Key_Run++;
+[; ;Interrupt.c: 85: Key_Run_times++;
+"85
+[e ++ _Key_Run_times -> -> 1 `i `uc ]
+[; ;Interrupt.c: 86: if(Key_Run_times == 40)
+"86
+[e $ ! == -> _Key_Run_times `i -> 40 `i 145  ]
+[; ;Interrupt.c: 87: {
 "87
-[e ++ _Key_Run -> -> 1 `i `uc ]
-[; ;Interrupt.c: 88: Key_Run_times = 0;
+{
+[; ;Interrupt.c: 88: Key_Run++;
 "88
-[e = _Key_Run_times -> -> 0 `i `uc ]
-[; ;Interrupt.c: 89: Key_Up = 1;
+[e ++ _Key_Run -> -> 1 `i `uc ]
+[; ;Interrupt.c: 89: Key_Run_times = 0;
 "89
-[e = _Key_Up -> -> 1 `i `uc ]
+[e = _Key_Run_times -> -> 0 `i `uc ]
+[; ;Interrupt.c: 90: Key_Up = 1;
 "90
-}
-[e :U 145 ]
+[e = _Key_Up -> -> 1 `i `uc ]
 "91
 }
-[; ;Interrupt.c: 90: }
-[; ;Interrupt.c: 91: } else Key_Run_times = 0;
+[e :U 145 ]
+"92
+}
+[; ;Interrupt.c: 91: }
+[; ;Interrupt.c: 92: } else Key_Run_times = 0;
 [e $U 146  ]
 [e :U 144 ]
 [e = _Key_Run_times -> -> 0 `i `uc ]
 [e :U 146 ]
-"92
+"93
 }
 [e :U 142 ]
-[; ;Interrupt.c: 92: }
-[; ;Interrupt.c: 94: if(Work_Flag == 0)
-"94
-[e $ ! == -> _Work_Flag `i -> 0 `i 147  ]
-[; ;Interrupt.c: 95: {
+[; ;Interrupt.c: 93: }
+[; ;Interrupt.c: 95: if(Work_Flag == 0)
 "95
-{
-[; ;Interrupt.c: 96: if(PORTCbits.RC1 == 1) Onekey_Key_Up = 0;
+[e $ ! == -> _Work_Flag `i -> 0 `i 147  ]
+[; ;Interrupt.c: 96: {
 "96
+{
+[; ;Interrupt.c: 97: if(PORTCbits.RC1 == 1) Onekey_Key_Up = 0;
+"97
 [e $ ! == -> . . _PORTCbits 0 1 `i -> 1 `i 148  ]
 [e = _Onekey_Key_Up -> -> 0 `i `uc ]
 [e :U 148 ]
-[; ;Interrupt.c: 97: if((PORTCbits.RC1 == 0) && (Onekey_Key_Up == 0))
-"97
-[e $ ! && == -> . . _PORTCbits 0 1 `i -> 0 `i == -> _Onekey_Key_Up `i -> 0 `i 149  ]
-[; ;Interrupt.c: 98: {
+[; ;Interrupt.c: 98: if((PORTCbits.RC1 == 0) && (Onekey_Key_Up == 0))
 "98
-{
-[; ;Interrupt.c: 99: Onekey_times++;
+[e $ ! && == -> . . _PORTCbits 0 1 `i -> 0 `i == -> _Onekey_Key_Up `i -> 0 `i 149  ]
+[; ;Interrupt.c: 99: {
 "99
-[e ++ _Onekey_times -> -> 1 `i `uc ]
-[; ;Interrupt.c: 100: if(Onekey_times == 40)
-"100
-[e $ ! == -> _Onekey_times `i -> 40 `i 150  ]
-[; ;Interrupt.c: 101: {
-"101
 {
-[; ;Interrupt.c: 102: Onekey_Flag++;
+[; ;Interrupt.c: 100: Onekey_times++;
+"100
+[e ++ _Onekey_times -> -> 1 `i `uc ]
+[; ;Interrupt.c: 101: if(Onekey_times == 40)
+"101
+[e $ ! == -> _Onekey_times `i -> 40 `i 150  ]
+[; ;Interrupt.c: 102: {
 "102
-[e ++ _Onekey_Flag -> -> 1 `i `uc ]
-[; ;Interrupt.c: 103: Onekey_times =0;
+{
+[; ;Interrupt.c: 103: Onekey_Flag++;
 "103
-[e = _Onekey_times -> -> 0 `i `uc ]
-[; ;Interrupt.c: 104: Onekey_Key_Up = 1;
+[e ++ _Onekey_Flag -> -> 1 `i `uc ]
+[; ;Interrupt.c: 104: Onekey_times =0;
 "104
-[e = _Onekey_Key_Up -> -> 1 `i `uc ]
+[e = _Onekey_times -> -> 0 `i `uc ]
+[; ;Interrupt.c: 105: Onekey_Key_Up = 1;
 "105
-}
-[e :U 150 ]
+[e = _Onekey_Key_Up -> -> 1 `i `uc ]
 "106
 }
-[; ;Interrupt.c: 105: }
-[; ;Interrupt.c: 106: } else Onekey_times = 0;
+[e :U 150 ]
+"107
+}
+[; ;Interrupt.c: 106: }
+[; ;Interrupt.c: 107: } else Onekey_times = 0;
 [e $U 151  ]
 [e :U 149 ]
 [e = _Onekey_times -> -> 0 `i `uc ]
 [e :U 151 ]
-"107
+"108
 }
 [e :U 147 ]
-[; ;Interrupt.c: 107: }
-[; ;Interrupt.c: 109: if(Open_Cover_Flag == 1)
-"109
-[e $ ! == -> _Open_Cover_Flag `i -> 1 `i 152  ]
-[; ;Interrupt.c: 110: {
+[; ;Interrupt.c: 108: }
+[; ;Interrupt.c: 110: if(Open_Cover_Flag == 1)
 "110
-{
-[; ;Interrupt.c: 111: Open_Cover_times++;
+[e $ ! == -> _Open_Cover_Flag `i -> 1 `i 152  ]
+[; ;Interrupt.c: 111: {
 "111
-[e ++ _Open_Cover_times -> -> 1 `i `ui ]
+{
+[; ;Interrupt.c: 112: Open_Cover_times++;
 "112
+[e ++ _Open_Cover_times -> -> 1 `i `ui ]
+"113
 }
 [e :U 152 ]
-[; ;Interrupt.c: 112: }
-[; ;Interrupt.c: 114: if(Count_Flag == 1)
-"114
-[e $ ! == -> _Count_Flag `i -> 1 `i 153  ]
-[; ;Interrupt.c: 115: {
+[; ;Interrupt.c: 113: }
+[; ;Interrupt.c: 115: if(Count_Flag == 1)
 "115
-{
-[; ;Interrupt.c: 116: Flag_working_time++;
+[e $ ! == -> _Count_Flag `i -> 1 `i 153  ]
+[; ;Interrupt.c: 116: {
 "116
-[e ++ _Flag_working_time -> -> 1 `i `ui ]
-[; ;Interrupt.c: 117: if((Flag_working_time == 6000) )
-"117
-[e $ ! == _Flag_working_time -> -> 6000 `i `ui 154  ]
-[; ;Interrupt.c: 118: {
-"118
 {
-[; ;Interrupt.c: 119: Start_Flag = 1;
+[; ;Interrupt.c: 117: Flag_working_time++;
+"117
+[e ++ _Flag_working_time -> -> 1 `i `ui ]
+[; ;Interrupt.c: 118: if((Flag_working_time >= 6000) )
+"118
+[e $ ! >= _Flag_working_time -> -> 6000 `i `ui 154  ]
+[; ;Interrupt.c: 119: {
 "119
-[e = _Start_Flag -> -> 1 `i `uc ]
-[; ;Interrupt.c: 120: Stop_Flag = 1;
+{
+[; ;Interrupt.c: 120: Start_Flag = 1;
 "120
-[e = _Stop_Flag -> -> 1 `i `uc ]
-[; ;Interrupt.c: 121: Flag_working_time = 0;
+[e = _Start_Flag -> -> 1 `i `uc ]
+[; ;Interrupt.c: 121: Stop_Flag = 1;
 "121
-[e = _Flag_working_time -> -> 0 `i `ui ]
+[e = _Stop_Flag -> -> 1 `i `uc ]
+[; ;Interrupt.c: 122: Flag_working_time = 0;
 "122
+[e = _Flag_working_time -> -> 0 `i `ui ]
+"123
 }
 [e :U 154 ]
-[; ;Interrupt.c: 122: }
-[; ;Interrupt.c: 123: if(Flag_working_time > 400)
-"123
-[e $ ! > _Flag_working_time -> -> 400 `i `ui 155  ]
-[; ;Interrupt.c: 124: {
+[; ;Interrupt.c: 123: }
+[; ;Interrupt.c: 124: if(Flag_working_time > 400)
 "124
-{
-[; ;Interrupt.c: 125: Speed_LED_times++;
+[e $ ! > _Flag_working_time -> -> 400 `i `ui 155  ]
+[; ;Interrupt.c: 125: {
 "125
-[e ++ _Speed_LED_times -> -> 1 `i `ui ]
-[; ;Interrupt.c: 126: if(Speed_LED_times == 20)
-"126
-[e $ ! == _Speed_LED_times -> -> 20 `i `ui 156  ]
-[; ;Interrupt.c: 127: {
-"127
 {
-[; ;Interrupt.c: 128: PORTBbits.RB0 = ~ PORTBbits.RB0;
+[; ;Interrupt.c: 126: Speed_LED_times++;
+"126
+[e ++ _Speed_LED_times -> -> 1 `i `ui ]
+[; ;Interrupt.c: 127: if(Speed_LED_times == 20)
+"127
+[e $ ! == _Speed_LED_times -> -> 20 `i `ui 156  ]
+[; ;Interrupt.c: 128: {
 "128
-[e = . . _PORTBbits 0 0 -> ~ -> . . _PORTBbits 0 0 `i `uc ]
-[; ;Interrupt.c: 129: Speed_LED_times = 0;
+{
+[; ;Interrupt.c: 129: PORTBbits.RB0 = ~ PORTBbits.RB0;
 "129
-[e = _Speed_LED_times -> -> 0 `i `ui ]
+[e = . . _PORTBbits 0 0 -> ~ -> . . _PORTBbits 0 0 `i `uc ]
+[; ;Interrupt.c: 130: Speed_LED_times = 0;
 "130
-}
-[e :U 156 ]
+[e = _Speed_LED_times -> -> 0 `i `ui ]
 "131
 }
-[; ;Interrupt.c: 130: }
-[; ;Interrupt.c: 131: }else PORTBbits.RB0 = 1;asm ("NOP");
+[e :U 156 ]
+"132
+}
+[; ;Interrupt.c: 131: }
+[; ;Interrupt.c: 132: }else PORTBbits.RB0 = 1;asm ("NOP");
 [e $U 157  ]
 [e :U 155 ]
 [e = . . _PORTBbits 0 0 -> -> 1 `i `uc ]
 [e :U 157 ]
 [; NOP ;#
-"132
+"133
 }
-[; ;Interrupt.c: 132: } else Flag_working_time = 0;
+[; ;Interrupt.c: 133: } else Flag_working_time = 0;
 [e $U 158  ]
 [e :U 153 ]
 [e = _Flag_working_time -> -> 0 `i `ui ]
 [e :U 158 ]
-[; ;Interrupt.c: 133: }
-"133
+[; ;Interrupt.c: 134: }
+"134
 [e :UE 141 ]
 }
-"135
+"136
 [v _TMR2_int `(v  1 ef ]
 {
-[; ;Interrupt.c: 134: void TMR2_int(void)
-[; ;Interrupt.c: 135: {
+[; ;Interrupt.c: 135: void TMR2_int(void)
+[; ;Interrupt.c: 136: {
 [e :U _TMR2_int ]
 [f ]
-[; ;Interrupt.c: 136: TMR2IF=0;
-"136
-[e = _TMR2IF -> -> 0 `i `b ]
-[; ;Interrupt.c: 137: TMR2=0;
+[; ;Interrupt.c: 137: TMR2IF=0;
 "137
-[e = _TMR2 -> -> 0 `i `uc ]
-[; ;Interrupt.c: 138: FG_Period_time++;
+[e = _TMR2IF -> -> 0 `i `b ]
+[; ;Interrupt.c: 138: TMR2=0;
 "138
-[e ++ _FG_Period_time -> -> 1 `i `ui ]
-[; ;Interrupt.c: 139: if(FG_Period_time >=300) FG_Period_time = 300;
+[e = _TMR2 -> -> 0 `i `uc ]
+[; ;Interrupt.c: 139: FG_Period_time++;
 "139
+[e ++ _FG_Period_time -> -> 1 `i `ui ]
+[; ;Interrupt.c: 140: if(FG_Period_time >=300) FG_Period_time = 300;
+"140
 [e $ ! >= _FG_Period_time -> -> 300 `i `ui 160  ]
 [e = _FG_Period_time -> -> 300 `i `ui ]
 [e :U 160 ]
-[; ;Interrupt.c: 140: }
-"140
+[; ;Interrupt.c: 141: }
+"141
 [e :UE 159 ]
 }
-"142
+"143
 [v _RBCN_int `(v  1 ef ]
 {
-[; ;Interrupt.c: 141: void RBCN_int(void)
-[; ;Interrupt.c: 142: {
+[; ;Interrupt.c: 142: void RBCN_int(void)
+[; ;Interrupt.c: 143: {
 [e :U _RBCN_int ]
 [f ]
-"143
-[v _Sameple `uc  1 a ]
-[; ;Interrupt.c: 143: unsigned char Sameple;
-[; ;Interrupt.c: 144: Sameple = PORTB;
 "144
-[e = _Sameple _PORTB ]
-[; ;Interrupt.c: 145: RBIF=0;
+[v _Sameple `uc  1 a ]
+[; ;Interrupt.c: 144: unsigned char Sameple;
+[; ;Interrupt.c: 145: Sameple = PORTB;
 "145
-[e = _RBIF -> -> 0 `i `b ]
-[; ;Interrupt.c: 146: FG_CN_Count++;
+[e = _Sameple _PORTB ]
+[; ;Interrupt.c: 146: RBIF=0;
 "146
-[e ++ _FG_CN_Count -> -> 1 `i `uc ]
-[; ;Interrupt.c: 147: if(FG_CN_Count==3)
+[e = _RBIF -> -> 0 `i `b ]
+[; ;Interrupt.c: 147: FG_CN_Count++;
 "147
-[e $ ! == -> _FG_CN_Count `i -> 3 `i 162  ]
-[; ;Interrupt.c: 148: {
+[e ++ _FG_CN_Count -> -> 1 `i `uc ]
+[; ;Interrupt.c: 148: if(FG_CN_Count==3)
 "148
-{
-[; ;Interrupt.c: 149: FG_CN_Count=0;
+[e $ ! == -> _FG_CN_Count `i -> 3 `i 162  ]
+[; ;Interrupt.c: 149: {
 "149
-[e = _FG_CN_Count -> -> 0 `i `uc ]
-[; ;Interrupt.c: 150: TMR2ON=0;
-"150
-[e = _TMR2ON -> -> 0 `i `b ]
-[; ;Interrupt.c: 151: Flag_FG_Period=1;
-"151
-[e = _Flag_FG_Period -> -> 1 `i `uc ]
-[; ;Interrupt.c: 152: Flag_FG_Period_time=FG_Period_time;
-"152
-[e = _Flag_FG_Period_time _FG_Period_time ]
-[; ;Interrupt.c: 153: FG_Period_time=0;
-"153
-[e = _FG_Period_time -> -> 0 `i `ui ]
-"154
-}
-[; ;Interrupt.c: 154: }
-[e $U 163  ]
-"155
-[e :U 162 ]
-[; ;Interrupt.c: 155: else
-[; ;Interrupt.c: 156: {
-"156
 {
-[; ;Interrupt.c: 157: TMR2ON=1;
+[; ;Interrupt.c: 150: FG_CN_Count=0;
+"150
+[e = _FG_CN_Count -> -> 0 `i `uc ]
+[; ;Interrupt.c: 151: TMR2ON=0;
+"151
+[e = _TMR2ON -> -> 0 `i `b ]
+[; ;Interrupt.c: 152: Flag_FG_Period=1;
+"152
+[e = _Flag_FG_Period -> -> 1 `i `uc ]
+[; ;Interrupt.c: 153: Flag_FG_Period_time=FG_Period_time;
+"153
+[e = _Flag_FG_Period_time _FG_Period_time ]
+[; ;Interrupt.c: 154: FG_Period_time=0;
+"154
+[e = _FG_Period_time -> -> 0 `i `ui ]
+"155
+}
+[; ;Interrupt.c: 155: }
+[e $U 163  ]
+"156
+[e :U 162 ]
+[; ;Interrupt.c: 156: else
+[; ;Interrupt.c: 157: {
 "157
-[e = _TMR2ON -> -> 1 `i `b ]
+{
+[; ;Interrupt.c: 158: TMR2ON=1;
 "158
+[e = _TMR2ON -> -> 1 `i `b ]
+"159
 }
 [e :U 163 ]
-[; ;Interrupt.c: 158: }
-[; ;Interrupt.c: 160: }
-"160
+[; ;Interrupt.c: 159: }
+[; ;Interrupt.c: 161: }
+"161
 [e :UE 161 ]
 }

@@ -1525,7 +1525,7 @@ void InitDevices(void);
 void IIC_init(void);
 void InitialiseADC(void);
 
-# 4 "InitDevices.c"
+# 6 "InitDevices.c"
 extern unsigned char RecFlag;
 
 typedef struct{
@@ -1555,10 +1555,11 @@ void PortInit(void)
 {
 PORTA = 0x00;
 PORTB = 0x00;
-TRISA = 0xEB;
+TRISA |= 0xE2;
 TRISB = 0X12;
 PORTC = 0X00;
 TRISC = 0XE2;
+
 ANSELH = 0x00;
 
 
@@ -1581,7 +1582,7 @@ GO_DONE = 1;
 ADON = 1;
 }
 
-# 66
+# 69
 void IIC_init(void)
 {
 TRISC3=1;
@@ -1639,7 +1640,7 @@ PortInit();
 
 InitTimer1();
 IIC_init();
-InitialiseADC();
+
 InitTimer2();
 InitCn();
 PEIE = 1;

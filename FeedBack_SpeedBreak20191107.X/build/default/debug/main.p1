@@ -1253,29 +1253,25 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _Stop_Flag `uc  1 e ]
 "8 main.c
 [v _kai `uc  1 e ]
-"15 main.c
-[v _Once `uc  1 e ]
-"16 main.c
-[v _Not_two `uc  1 e ]
 "17 main.c
-[v _Count_Flag `uc  1 e ]
+[v _Once `uc  1 e ]
 "18 main.c
-[v _Work_Flag `uc  1 e ]
+[v _Not_two `uc  1 e ]
 "19 main.c
-[v _Start_KeyRun_Flag `uc  1 e ]
+[v _Count_Flag `uc  1 e ]
+"20 main.c
+[v _Work_Flag `uc  1 e ]
 "21 main.c
-[v _ADC_Val `ui  1 e ]
+[v _Start_KeyRun_Flag `uc  1 e ]
 [p mainexit ]
 "38 GlobalVar.h
 [v _InitDevices `(v  0 ef ]
 "9 main.c
 [v _Key_Run `uc  0 e ]
-"21 ADC.h
-[v _ReadADC `(ui  0 ef1`uc ]
-"31 GlobalVar.h
-[v _delaynms `(v  0 ef1`ui ]
 "10 main.c
 [v _Onekey_Flag `uc  0 e ]
+"31 GlobalVar.h
+[v _delaynms `(v  0 ef1`ui ]
 "28 GlobalVar.h
 [v _write_IIC `(v  0 ef2`uc`uc ]
 "35 GlobalVar.h
@@ -1288,6 +1284,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _Open_Cover_times `ui  0 e ]
 "4 main.c
 [v _The_Close `(v  0 ef ]
+"15 main.c
+[v _Forbid_input `uc  0 e ]
 "16 GlobalVar.h
 [v _VOLT `ui  0 e ]
 [; ;pic16f886.h: 118: volatile unsigned char INDF @ 0x000;
@@ -2517,275 +2515,166 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 10: extern unsigned char Onekey_Flag;
 [; ;main.c: 12: extern unsigned char Open_Cover_Flag;
 [; ;main.c: 13: extern unsigned int Open_Cover_times;
-"15
+[; ;main.c: 15: extern unsigned char Forbid_input;
+"17
 [i _Once
 -> -> 0 `i `uc
 ]
-[; ;main.c: 15: unsigned char Once=0;
-"16
+[; ;main.c: 17: unsigned char Once=0;
+"18
 [i _Not_two
 -> -> 0 `i `uc
 ]
-[; ;main.c: 16: unsigned char Not_two=0;
-"17
+[; ;main.c: 18: unsigned char Not_two=0;
+"19
 [i _Count_Flag
 -> -> 0 `i `uc
 ]
-[; ;main.c: 17: unsigned char Count_Flag=0;
-"18
+[; ;main.c: 19: unsigned char Count_Flag=0;
+"20
 [i _Work_Flag
 -> -> 0 `i `uc
 ]
-[; ;main.c: 18: unsigned char Work_Flag=0;
-"19
+[; ;main.c: 20: unsigned char Work_Flag=0;
+"21
 [i _Start_KeyRun_Flag
 -> -> 0 `i `uc
 ]
-[; ;main.c: 19: unsigned char Start_KeyRun_Flag=0;
-[; ;main.c: 21: unsigned int ADC_Val;
-"23
+[; ;main.c: 21: unsigned char Start_KeyRun_Flag=0;
+"26
 [v _main `(v  1 ef ]
 {
-[; ;main.c: 22: void main(void)
-[; ;main.c: 23: {
+[; ;main.c: 25: void main(void)
+[; ;main.c: 26: {
 [e :U _main ]
 [f ]
-"24
-[v _i `uc  1 a ]
-[; ;main.c: 24: unsigned char i;
-[; ;main.c: 25: InitDevices();
-"25
-[e ( _InitDevices ..  ]
-[; ;main.c: 26: while(1)
-"26
-[e :U 139 ]
-[; ;main.c: 27: {
 "27
-{
-[; ;main.c: 29: if(PORTAbits.RA5 == 1) {PORTBbits.RB2 = 1;asm ("NOP");}
+[v _i `uc  1 a ]
+[; ;main.c: 27: unsigned char i;
+[; ;main.c: 28: InitDevices();
+"28
+[e ( _InitDevices ..  ]
+[; ;main.c: 29: PORTBbits.RB2 = 1;asm ("NOP");
 "29
-[e $ ! == -> . . _PORTAbits 0 5 `i -> 1 `i 141  ]
-{
 [e = . . _PORTBbits 0 2 -> -> 1 `i `uc ]
 [; NOP ;#
-}
-[e $U 142  ]
+[; ;main.c: 30: PORTBbits.RB3 = 0;asm ("NOP");
 "30
-[e :U 141 ]
-[; ;main.c: 30: else {PORTBbits.RB2 = 0;asm ("NOP");}
-{
-[e = . . _PORTBbits 0 2 -> -> 0 `i `uc ]
+[e = . . _PORTBbits 0 3 -> -> 0 `i `uc ]
 [; NOP ;#
-}
-[e :U 142 ]
-[; ;main.c: 32: if((Count_Flag == 0) && (Work_Flag == 1)) {PORTBbits.RB0 = 1;asm ("NOP");}
+[; ;main.c: 31: while(1)
+"31
+[e :U 139 ]
+[; ;main.c: 32: {
 "32
-[e $ ! && == -> _Count_Flag `i -> 0 `i == -> _Work_Flag `i -> 1 `i 143  ]
+{
+[; ;main.c: 34: if((Count_Flag == 0) && (Work_Flag == 1)) {PORTBbits.RB0 = 1;asm ("NOP");}
+"34
+[e $ ! && == -> _Count_Flag `i -> 0 `i == -> _Work_Flag `i -> 1 `i 141  ]
 {
 [e = . . _PORTBbits 0 0 -> -> 1 `i `uc ]
 [; NOP ;#
 }
-[e $U 144  ]
-"33
-[e :U 143 ]
-[; ;main.c: 33: else if(Key_Run == 0 ) {PORTBbits.RB0 = 0;asm ("NOP");}
-[e $ ! == -> _Key_Run `i -> 0 `i 145  ]
+[e $U 142  ]
+"35
+[e :U 141 ]
+[; ;main.c: 35: else if(Key_Run == 0 ) {PORTBbits.RB0 = 0;asm ("NOP");}
+[e $ ! == -> _Key_Run `i -> 0 `i 143  ]
 {
 [e = . . _PORTBbits 0 0 -> -> 0 `i `uc ]
 [; NOP ;#
 }
-[e :U 145 ]
-"35
-[e :U 144 ]
-[; ;main.c: 35: for(i=0;i<70;i++)
-{
-[e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 70 `i 146  ]
-[e $U 147  ]
-"36
-[e :U 146 ]
-[; ;main.c: 36: {
-{
-[; ;main.c: 37: ADC_Val += ReadADC(3);
-"37
-[e =+ _ADC_Val ( _ReadADC (1 -> -> 3 `i `uc ]
-"38
-}
-"35
-[e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 70 `i 146  ]
-[e :U 147 ]
-"38
-}
-[; ;main.c: 38: }
-[; ;main.c: 39: ADC_Val/=70;
-"39
-[e =/ _ADC_Val -> -> 70 `uc `ui ]
-[; ;main.c: 40: if((ADC_Val< 510))
-"40
-[e $ ! < _ADC_Val -> -> 510 `i `ui 149  ]
-[; ;main.c: 41: {
-"41
-{
-[; ;main.c: 42: if(PORTAbits.RA5 == 0)
-"42
-[e $ ! == -> . . _PORTAbits 0 5 `i -> 0 `i 150  ]
-[; ;main.c: 43: {
-"43
-{
-[; ;main.c: 44: PORTBbits.RB5 = ~PORTBbits.RB5;
-"44
-[e = . . _PORTBbits 0 5 -> ~ -> . . _PORTBbits 0 5 `i `uc ]
-[; ;main.c: 45: delaynms(50);
-"45
-[e ( _delaynms (1 -> -> 50 `i `ui ]
-"46
-}
-[e :U 150 ]
-"47
-}
-[; ;main.c: 46: }
-[; ;main.c: 47: }
-[e $U 151  ]
-"48
-[e :U 149 ]
-[; ;main.c: 48: else if(ADC_Val > 595)
-[e $ ! > _ADC_Val -> -> 595 `i `ui 152  ]
-[; ;main.c: 49: {
-"49
-{
-[; ;main.c: 50: PORTBbits.RB5 = 0;asm ("NOP");
-"50
-[e = . . _PORTBbits 0 5 -> -> 0 `i `uc ]
-[; NOP ;#
-"51
-}
-[; ;main.c: 51: }
-[e $U 153  ]
-"52
-[e :U 152 ]
-[; ;main.c: 52: else if((ADC_Val < 580) && (ADC_Val> 540))
-[e $ ! && < _ADC_Val -> -> 580 `i `ui > _ADC_Val -> -> 540 `i `ui 154  ]
-[; ;main.c: 53: {
-"53
-{
-[; ;main.c: 54: if(PORTAbits.RA5 == 1) {PORTBbits.RB5 = 1;asm ("NOP");}
-"54
-[e $ ! == -> . . _PORTAbits 0 5 `i -> 1 `i 155  ]
-{
-[e = . . _PORTBbits 0 5 -> -> 1 `i `uc ]
-[; NOP ;#
-}
-[e $U 156  ]
-"55
-[e :U 155 ]
-[; ;main.c: 55: else {PORTBbits.RB5 = 0;asm ("NOP");}
-{
-[e = . . _PORTBbits 0 5 -> -> 0 `i `uc ]
-[; NOP ;#
-}
-[e :U 156 ]
-"56
-}
-[e :U 154 ]
-"59
-[e :U 153 ]
-[e :U 151 ]
-[; ;main.c: 56: }
-[; ;main.c: 59: if((Onekey_Flag == 1) &&(Work_Flag == 0))
-[e $ ! && == -> _Onekey_Flag `i -> 1 `i == -> _Work_Flag `i -> 0 `i 157  ]
-[; ;main.c: 60: {
-"60
-{
-[; ;main.c: 61: PORTCbits.RC0= 1;asm ("NOP");
+[e :U 143 ]
 "61
+[e :U 142 ]
+[; ;main.c: 61: if((Onekey_Flag == 1) &&(Work_Flag == 0))
+[e $ ! && == -> _Onekey_Flag `i -> 1 `i == -> _Work_Flag `i -> 0 `i 144  ]
+[; ;main.c: 62: {
+"62
+{
+[; ;main.c: 63: PORTCbits.RC0= 1;asm ("NOP");
+"63
 [e = . . _PORTCbits 0 0 -> -> 1 `i `uc ]
 [; NOP ;#
-[; ;main.c: 62: PORTAbits.RA4= 1;asm ("NOP");
-"62
+[; ;main.c: 64: PORTAbits.RA4= 1;asm ("NOP");
+"64
 [e = . . _PORTAbits 0 4 -> -> 1 `i `uc ]
 [; NOP ;#
-[; ;main.c: 63: PORTBbits.RB3 = 1;asm ("NOP");
-"63
-[e = . . _PORTBbits 0 3 -> -> 1 `i `uc ]
-[; NOP ;#
-[; ;main.c: 64: Not_two = 1;
-"64
-[e = _Not_two -> -> 1 `i `uc ]
+[; ;main.c: 65: PORTBbits.RB5 = 1;asm ("NOP");
 "65
-}
-[e :U 157 ]
-[; ;main.c: 65: }
-[; ;main.c: 66: if((Onekey_Flag == 2) && (Work_Flag == 0))
+[e = . . _PORTBbits 0 5 -> -> 1 `i `uc ]
+[; NOP ;#
+[; ;main.c: 66: Not_two = 1;
 "66
-[e $ ! && == -> _Onekey_Flag `i -> 2 `i == -> _Work_Flag `i -> 0 `i 158  ]
-[; ;main.c: 67: {
+[e = _Not_two -> -> 1 `i `uc ]
 "67
-{
-[; ;main.c: 68: PORTAbits.RA2 = 1;asm ("NOP");
+}
+[e :U 144 ]
+[; ;main.c: 67: }
+[; ;main.c: 68: if((Onekey_Flag == 2) && (Work_Flag == 0))
 "68
+[e $ ! && == -> _Onekey_Flag `i -> 2 `i == -> _Work_Flag `i -> 0 `i 145  ]
+[; ;main.c: 69: {
+"69
+{
+[; ;main.c: 70: PORTAbits.RA2 = 1;asm ("NOP");
+"70
 [e = . . _PORTAbits 0 2 -> -> 1 `i `uc ]
 [; NOP ;#
-[; ;main.c: 69: delaynms(10);
-"69
+[; ;main.c: 71: delaynms(10);
+"71
 [e ( _delaynms (1 -> -> 10 `i `ui ]
-[; ;main.c: 70: PORTAbits.RA2 = 0;asm ("NOP");
-"70
+[; ;main.c: 72: PORTAbits.RA2 = 0;asm ("NOP");
+"72
 [e = . . _PORTAbits 0 2 -> -> 0 `i `uc ]
 [; NOP ;#
-[; ;main.c: 71: PORTCbits.RC0 = 0;asm ("NOP");
-"71
+[; ;main.c: 73: PORTCbits.RC0 = 0;asm ("NOP");
+"73
 [e = . . _PORTCbits 0 0 -> -> 0 `i `uc ]
 [; NOP ;#
-[; ;main.c: 72: PORTAbits.RA4 = 0;asm ("NOP");
-"72
+[; ;main.c: 74: PORTAbits.RA4 = 0;asm ("NOP");
+"74
 [e = . . _PORTAbits 0 4 -> -> 0 `i `uc ]
 [; NOP ;#
-[; ;main.c: 73: PORTBbits.RB3 = 0;asm ("NOP");
-"73
-[e = . . _PORTBbits 0 3 -> -> 0 `i `uc ]
-[; NOP ;#
-[; ;main.c: 74: Not_two = 0;
-"74
-[e = _Not_two -> -> 0 `i `uc ]
-[; ;main.c: 75: Onekey_Flag = 0;
+[; ;main.c: 75: PORTBbits.RB5 = 0;asm ("NOP");
 "75
-[e = _Onekey_Flag -> -> 0 `i `uc ]
+[e = . . _PORTBbits 0 5 -> -> 0 `i `uc ]
+[; NOP ;#
+[; ;main.c: 76: Not_two = 0;
 "76
-}
-[e :U 158 ]
-[; ;main.c: 76: }
-[; ;main.c: 78: if((PORTAbits.RA1 == 0) && (Not_two == 1))
+[e = _Not_two -> -> 0 `i `uc ]
+[; ;main.c: 77: Onekey_Flag = 0;
+"77
+[e = _Onekey_Flag -> -> 0 `i `uc ]
 "78
-[e $ ! && == -> . . _PORTAbits 0 1 `i -> 0 `i == -> _Not_two `i -> 1 `i 159  ]
-[; ;main.c: 79: {
-"79
-{
-[; ;main.c: 80: if(Key_Run == 1)
+}
+[e :U 145 ]
+[; ;main.c: 78: }
+[; ;main.c: 80: if((PORTAbits.RA1 == 0) && (Not_two == 1))
 "80
-[e $ ! == -> _Key_Run `i -> 1 `i 160  ]
+[e $ ! && == -> . . _PORTAbits 0 1 `i -> 0 `i == -> _Not_two `i -> 1 `i 146  ]
 [; ;main.c: 81: {
 "81
 {
-[; ;main.c: 82: while(Initial_Flag == 0)
+[; ;main.c: 82: if(Key_Run == 1)
 "82
-[e $U 161  ]
-[e :U 162 ]
+[e $ ! == -> _Key_Run `i -> 1 `i 147  ]
 [; ;main.c: 83: {
 "83
 {
-[; ;main.c: 84: Work_Flag = 1;
+[; ;main.c: 84: while(Initial_Flag == 0)
 "84
-[e = _Work_Flag -> -> 1 `i `uc ]
-[; ;main.c: 85: Count_Flag = 1;
+[e $U 148  ]
+[e :U 149 ]
+[; ;main.c: 85: {
 "85
-[e = _Count_Flag -> -> 1 `i `uc ]
-[; ;main.c: 86: write_IIC(0,0);
+{
+[; ;main.c: 86: Work_Flag = 1;
 "86
-[e ( _write_IIC (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;main.c: 87: delaynms(1);
+[e = _Work_Flag -> -> 1 `i `uc ]
+[; ;main.c: 87: Count_Flag = 1;
 "87
-[e ( _delaynms (1 -> -> 1 `i `ui ]
+[e = _Count_Flag -> -> 1 `i `uc ]
 [; ;main.c: 88: write_IIC(0x03,0x33 );
 "88
 [e ( _write_IIC (2 , -> -> 3 `i `uc -> -> 51 `i `uc ]
@@ -2806,17 +2695,17 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _kai -> -> 1 `i `uc ]
 [; ;main.c: 94: break;
 "94
-[e $U 163  ]
+[e $U 150  ]
 "95
 }
-[e :U 161 ]
-"82
-[e $ == -> _Initial_Flag `i -> 0 `i 162  ]
-[e :U 163 ]
+[e :U 148 ]
+"84
+[e $ == -> _Initial_Flag `i -> 0 `i 149  ]
+[e :U 150 ]
 [; ;main.c: 95: }
 [; ;main.c: 96: if((Start_Flag == 0)&&(kai == 1))
 "96
-[e $ ! && == -> _Start_Flag `i -> 0 `i == -> _kai `i -> 1 `i 164  ]
+[e $ ! && == -> _Start_Flag `i -> 0 `i == -> _kai `i -> 1 `i 151  ]
 [; ;main.c: 97: {
 "97
 {
@@ -2826,11 +2715,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 "99
 }
 [; ;main.c: 99: }
-[e $U 165  ]
+[e $U 152  ]
 "100
-[e :U 164 ]
+[e :U 151 ]
 [; ;main.c: 100: else if(Stop_Flag == 1)
-[e $ ! == -> _Stop_Flag `i -> 1 `i 166  ]
+[e $ ! == -> _Stop_Flag `i -> 1 `i 153  ]
 [; ;main.c: 101: {
 "101
 {
@@ -2839,7 +2728,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _Open_Cover_Flag -> -> 1 `i `uc ]
 [; ;main.c: 103: if(Once == 0)
 "103
-[e $ ! == -> _Once `i -> 0 `i 167  ]
+[e $ ! == -> _Once `i -> 0 `i 154  ]
 [; ;main.c: 104: {
 "104
 {
@@ -2851,14 +2740,14 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _Once -> -> 1 `i `uc ]
 "107
 }
-[e :U 167 ]
+[e :U 154 ]
 [; ;main.c: 107: }
 [; ;main.c: 108: Count_Flag=0;
 "108
 [e = _Count_Flag -> -> 0 `i `uc ]
 [; ;main.c: 109: if(Open_Cover_times == 2700)
 "109
-[e $ ! == _Open_Cover_times -> -> 2700 `i `ui 168  ]
+[e $ ! == _Open_Cover_times -> -> 2700 `i `ui 155  ]
 [; ;main.c: 110: {
 "110
 {
@@ -2867,128 +2756,134 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _The_Close ..  ]
 "112
 }
-[e :U 168 ]
+[e :U 155 ]
 "113
 }
-[e :U 166 ]
+[e :U 153 ]
 "114
-[e :U 165 ]
+[e :U 152 ]
 }
 [; ;main.c: 112: }
 [; ;main.c: 113: }
 [; ;main.c: 114: }
-[e $U 169  ]
+[e $U 156  ]
 "115
-[e :U 160 ]
+[e :U 147 ]
 [; ;main.c: 115: else if(Key_Run == 2)
-[e $ ! == -> _Key_Run `i -> 2 `i 170  ]
+[e $ ! == -> _Key_Run `i -> 2 `i 157  ]
 [; ;main.c: 116: {
 "116
 {
-[; ;main.c: 117: Open_Cover_Flag = 1;
+[; ;main.c: 117: Forbid_input = 1;
 "117
-[e = _Open_Cover_Flag -> -> 1 `i `uc ]
-[; ;main.c: 118: if(Once == 0)
+[e = _Forbid_input -> -> 1 `i `uc ]
+[; ;main.c: 118: Open_Cover_Flag = 1;
 "118
-[e $ ! == -> _Once `i -> 0 `i 171  ]
-[; ;main.c: 119: {
+[e = _Open_Cover_Flag -> -> 1 `i `uc ]
+[; ;main.c: 119: if(Once == 0)
 "119
-{
-[; ;main.c: 120: MotorClose();
+[e $ ! == -> _Once `i -> 0 `i 158  ]
+[; ;main.c: 120: {
 "120
-[e ( _MotorClose ..  ]
-[; ;main.c: 121: Once = 1;
-"121
-[e = _Once -> -> 1 `i `uc ]
-"122
-}
-[e :U 171 ]
-[; ;main.c: 122: }
-[; ;main.c: 123: Count_Flag=0;
-"123
-[e = _Count_Flag -> -> 0 `i `uc ]
-[; ;main.c: 124: if(Open_Cover_times == 2700)
-"124
-[e $ ! == _Open_Cover_times -> -> 2700 `i `ui 172  ]
-[; ;main.c: 125: {
-"125
 {
-[; ;main.c: 126: The_Close();
-"126
-[e ( _The_Close ..  ]
-"127
+[; ;main.c: 121: MotorClose();
+"121
+[e ( _MotorClose ..  ]
+[; ;main.c: 122: Once = 1;
+"122
+[e = _Once -> -> 1 `i `uc ]
+"123
 }
-[e :U 172 ]
+[e :U 158 ]
+[; ;main.c: 123: }
+[; ;main.c: 124: Count_Flag=0;
+"124
+[e = _Count_Flag -> -> 0 `i `uc ]
+[; ;main.c: 125: if(Open_Cover_times == 2700)
+"125
+[e $ ! == _Open_Cover_times -> -> 2700 `i `ui 159  ]
+[; ;main.c: 126: {
+"126
+{
+[; ;main.c: 127: The_Close();
+"127
+[e ( _The_Close ..  ]
 "128
 }
-[e :U 170 ]
-"129
-[e :U 169 ]
-}
 [e :U 159 ]
+"129
+}
+[e :U 157 ]
 "130
+[e :U 156 ]
+}
+[e :U 146 ]
+"139
 }
 [e :U 138 ]
-"26
+"31
 [e $U 139  ]
 [e :U 140 ]
-[; ;main.c: 127: }
 [; ;main.c: 128: }
 [; ;main.c: 129: }
 [; ;main.c: 130: }
-[; ;main.c: 131: }
-"131
+[; ;main.c: 139: }
+[; ;main.c: 141: }
+"141
 [e :UE 137 ]
 }
-"133
+"143
 [v _The_Close `(v  1 ef ]
 {
-[; ;main.c: 132: void The_Close(void)
-[; ;main.c: 133: {
+[; ;main.c: 142: void The_Close(void)
+[; ;main.c: 143: {
 [e :U _The_Close ]
 [f ]
-[; ;main.c: 134: kai = 0;
-"134
+[; ;main.c: 144: kai = 0;
+"144
 [e = _kai -> -> 0 `i `uc ]
-[; ;main.c: 135: Stop_Flag = 0;
-"135
+[; ;main.c: 145: Stop_Flag = 0;
+"145
 [e = _Stop_Flag -> -> 0 `i `uc ]
-[; ;main.c: 136: Start_Flag = 0;
-"136
+[; ;main.c: 146: Start_Flag = 0;
+"146
 [e = _Start_Flag -> -> 0 `i `uc ]
-[; ;main.c: 137: Initial_Flag = 0;
-"137
+[; ;main.c: 147: Initial_Flag = 0;
+"147
 [e = _Initial_Flag -> -> 0 `i `uc ]
-[; ;main.c: 138: Work_Flag = 0;
-"138
+[; ;main.c: 148: Work_Flag = 0;
+"148
 [e = _Work_Flag -> -> 0 `i `uc ]
-[; ;main.c: 139: VOLT=1150;
-"139
+[; ;main.c: 149: VOLT=1150;
+"149
 [e = _VOLT -> -> 1150 `i `ui ]
-[; ;main.c: 140: Open_Cover_Flag = 0;
-"140
+[; ;main.c: 150: Open_Cover_Flag = 0;
+"150
 [e = _Open_Cover_Flag -> -> 0 `i `uc ]
-[; ;main.c: 141: Open_Cover_times = 0;
-"141
+[; ;main.c: 151: Open_Cover_times = 0;
+"151
 [e = _Open_Cover_times -> -> 0 `i `ui ]
-[; ;main.c: 142: PORTAbits.RA2 = 1;asm ("NOP");
-"142
+[; ;main.c: 152: PORTAbits.RA2 = 1;asm ("NOP");
+"152
 [e = . . _PORTAbits 0 2 -> -> 1 `i `uc ]
 [; NOP ;#
-[; ;main.c: 143: delaynms(10);
-"143
+[; ;main.c: 153: delaynms(10);
+"153
 [e ( _delaynms (1 -> -> 10 `i `ui ]
-[; ;main.c: 144: PORTAbits.RA2 = 0;asm ("NOP");
-"144
+[; ;main.c: 154: PORTAbits.RA2 = 0;asm ("NOP");
+"154
 [e = . . _PORTAbits 0 2 -> -> 0 `i `uc ]
 [; NOP ;#
-[; ;main.c: 145: Key_Run = 0;
-"145
+[; ;main.c: 155: Key_Run = 0;
+"155
 [e = _Key_Run -> -> 0 `i `uc ]
-[; ;main.c: 146: Once = 0;
-"146
+[; ;main.c: 156: Once = 0;
+"156
 [e = _Once -> -> 0 `i `uc ]
-[; ;main.c: 147: }
-"147
-[e :UE 173 ]
+[; ;main.c: 157: Forbid_input = 0;
+"157
+[e = _Forbid_input -> -> 0 `i `uc ]
+[; ;main.c: 158: }
+"158
+[e :UE 160 ]
 }

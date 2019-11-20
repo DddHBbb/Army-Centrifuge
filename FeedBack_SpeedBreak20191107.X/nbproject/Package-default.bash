@@ -10,9 +10,9 @@ CND_CONF=default
 CND_DISTDIR=dist
 TMPDIR=build/${CND_CONF}/${IMAGE_TYPE}/tmp-packaging
 TMPDIRNAME=tmp-packaging
-OUTPUT_PATH=dist/${CND_CONF}/${IMAGE_TYPE}/FeedBack_SpeedBreak.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
-OUTPUT_BASENAME=FeedBack_SpeedBreak.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
-PACKAGE_TOP_DIR=feedbackspeedbreak.x/
+OUTPUT_PATH=dist/${CND_CONF}/${IMAGE_TYPE}/FeedBack_SpeedBreak20191107.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+OUTPUT_BASENAME=FeedBack_SpeedBreak20191107.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+PACKAGE_TOP_DIR=feedbackspeedbreak20191107.x/
 
 # Functions
 function checkReturnCode
@@ -57,15 +57,15 @@ mkdir -p ${TMPDIR}
 
 # Copy files and create directories and links
 cd "${TOP}"
-makeDirectory ${TMPDIR}/feedbackspeedbreak.x/bin
+makeDirectory ${TMPDIR}/feedbackspeedbreak20191107.x/bin
 copyFileToTmpDir "${OUTPUT_PATH}" "${TMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}" 0755
 
 
 # Generate tar file
 cd "${TOP}"
-rm -f ${CND_DISTDIR}/${CND_CONF}/package/feedbackspeedbreak.x.tar
+rm -f ${CND_DISTDIR}/${CND_CONF}/package/feedbackspeedbreak20191107.x.tar
 cd ${TMPDIR}
-tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/package/feedbackspeedbreak.x.tar *
+tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/package/feedbackspeedbreak20191107.x.tar *
 checkReturnCode
 
 # Cleanup

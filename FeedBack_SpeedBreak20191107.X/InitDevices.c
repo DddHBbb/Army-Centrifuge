@@ -117,7 +117,7 @@ void InitDevices(void)
 {
     systemOSC();
     PortInit();
-//    InitTimer0();
+    InitTimer0();
     InitTimer1();
     IIC_init();
     InitialiseADC();
@@ -126,5 +126,7 @@ void InitDevices(void)
     PEIE = 1;
     TMR1ON=1; 
     GIE=1; 
+      //WDTCON = 0x17;//2048ms
+    WDTCON = 0x12;//512ms  
 
 }

@@ -2665,6 +2665,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;InitDevices.c: 119: PortInit();
 "119
 [e ( _PortInit ..  ]
+[; ;InitDevices.c: 120: InitTimer0();
+"120
+[e ( _InitTimer0 ..  ]
 [; ;InitDevices.c: 121: InitTimer1();
 "121
 [e ( _InitTimer1 ..  ]

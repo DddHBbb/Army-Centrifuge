@@ -44,6 +44,7 @@ unsigned char Onekey_Flag=0;
 unsigned char Onekey_times=0;
 unsigned char Onekey_Key_Up=0;
 
+unsigned char Forbid_input=0;
 extern unsigned char Not_two;
 void  TMR1_int(void)                  //50ms
 {
@@ -76,7 +77,7 @@ void  TMR1_int(void)                  //50ms
 //        }
 
   //ÆôÍ£¿ª¹Ø¼ì²â
-    if((PORTAbits.RA1 == 0) &&  (Not_two == 1))
+    if((PORTAbits.RA1 == 0) &&  (Not_two == 1) && (Forbid_input == 0))
     {
     if(PORTBbits.RB1 == 1)   Key_Up = 0;
     if((PORTBbits.RB1 == 0) && (Key_Up == 0))
@@ -114,7 +115,7 @@ void  TMR1_int(void)                  //50ms
     if(Count_Flag == 1)
     {
         Flag_working_time++;       
-        if((Flag_working_time == 6000) )  
+        if((Flag_working_time >= 6000) )  
         {
             Start_Flag = 1;
             Stop_Flag = 1; 

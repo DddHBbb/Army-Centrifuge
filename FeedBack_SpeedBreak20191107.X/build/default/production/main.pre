@@ -1533,7 +1533,7 @@ bit RELAY_AC=0;
 unsigned int get1_ad(void);
 unsigned int ReadADC(unsigned char ADC_Channel);
 
-# 4 "main.c"
+# 7 "main.c"
 void The_Close(void);
 unsigned char Start_Flag=0;
 unsigned char Initial_Flag=0;
@@ -1544,6 +1544,8 @@ extern unsigned char Onekey_Flag;
 
 extern unsigned char Open_Cover_Flag;
 extern unsigned int Open_Cover_times;
+
+extern unsigned char Forbid_input;
 
 unsigned char Once=0;
 unsigned char Not_two=0;
@@ -1556,6 +1558,8 @@ void main(void)
 {
 unsigned char i;
 InitDevices();
+
+WDTCON = 0x12;
 while(1)
 {
 
@@ -1610,14 +1614,14 @@ Onekey_Flag = 0;
 
 if((PORTAbits.RA1 == 0) && (Not_two == 1))
 {
+WDTCONbits.SWDTEN = 1;
 if(Key_Run == 1)
 {
+asm("clrwdt");
 while(Initial_Flag == 0)
 {
 Work_Flag = 1;
 Count_Flag = 1;
-write_IIC(0,0);
-delaynms(1);
 write_IIC(0x03,0x33 );
 delaynms(1);
 write_IIC(0x04,0x4c );
@@ -1637,27 +1641,39 @@ if(Once == 0)
 {
 MotorClose();
 Once = 1;
+Forbid_input = 1;
 }
 Count_Flag=0;
-if(Open_Cover_times == 2700)
+if(Open_Cover_times >= 2700)
 {
+
 The_Close();
 }
 }
 }
 else if(Key_Run == 2)
 {
+asm("clrwdt");
 Open_Cover_Flag = 1;
+Forbid_input = 1;
 if(Once == 0)
 {
 MotorClose();
 Once = 1;
 }
 Count_Flag=0;
-if(Open_Cover_times == 2700)
+if(Open_Cover_times >= 2700)
 {
 The_Close();
 }
+}
+}
+else if (PORTAbits.RA1 != 0) write_IIC(0x00,0x00 );
+else if((PORTAbits.RA1 != 0) && (Initial_Flag == 1))
+{
+while(1)
+{
+write_IIC(0x00,0x00 ); ;
 }
 }
 }
@@ -1677,4 +1693,6 @@ delaynms(10);
 PORTAbits.RA2 = 0;asm ("NOP");
 Key_Run = 0;
 Once = 0;
+Forbid_input=0;
+WDTCONbits.SWDTEN = 0;
 }

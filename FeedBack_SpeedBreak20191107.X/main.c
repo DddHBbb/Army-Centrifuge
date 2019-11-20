@@ -1,6 +1,9 @@
 #include"GlobalVar.h"
 #include"main.h"
 #include "ADC.h"
+
+#define	CLRWDT()	asm("clrwdt")
+
 void The_Close(void);
 unsigned char Start_Flag=0;
 unsigned char Initial_Flag=0;
@@ -11,6 +14,8 @@ extern unsigned char Onekey_Flag;
 
 extern unsigned char Open_Cover_Flag;
 extern unsigned int Open_Cover_times;
+
+extern unsigned char Forbid_input;
 
 unsigned char Once=0;
 unsigned char Not_two=0;
@@ -23,9 +28,10 @@ void main(void)
 {
     unsigned char i;
     InitDevices(); 
+    write_IIC(0x00,0x00 );
      while(1)
     {    
-        //DC检测
+//        //DC检测
        if(PORTAbits.RA5 == 1)  {DC_LED_ON;}
        else                    {DC_LED_OFF;}
        //开盖检测
@@ -54,7 +60,7 @@ void main(void)
                if(PORTAbits.RA5 == 1)  {BAT_LED_ON;}
                else                    {BAT_LED_OFF;}
             }
-             
+ //    CLRWDT();
         ///一键开关
        if((Onekey_Flag == 1) &&(Work_Flag == 0))
          {
@@ -77,14 +83,14 @@ void main(void)
        //合盖运行
     if((PORTAbits.RA1 == 0) &&  (Not_two == 1))
       {      
+        WDTCONbits.SWDTEN  = 1;
       if(Key_Run == 1)
       {          
+          CLRWDT();
             while(Initial_Flag == 0) //给一个初速度
             {
                Work_Flag = 1;
                Count_Flag = 1;
-               write_IIC(0,0);    //0V  
-               delaynms(1);
                write_IIC(0x03,0x33 );    //1V  819
                delaynms(1);
                write_IIC(0x04,0x4c );    //1V  1100
@@ -104,29 +110,41 @@ void main(void)
                 {
                   MotorClose();
                   Once = 1;
+                  Forbid_input = 1;
                 }
                 Count_Flag=0; 
-                if(Open_Cover_times == 2700)
+                if(Open_Cover_times >= 2700)
                 {     
+                     
                      The_Close();
                 } 
             }
       }
       else if(Key_Run == 2)
       {
+          CLRWDT();
         Open_Cover_Flag = 1;
+        Forbid_input = 1;
         if(Once == 0)
         {
           MotorClose();
           Once = 1;
         }   
         Count_Flag=0; 
-        if(Open_Cover_times == 2700)
+        if(Open_Cover_times >= 2700)
         {     
             The_Close();
         }
       }
      }
+    else if (PORTAbits.RA1 != 0)   write_IIC(0x00,0x00 );
+    else if((PORTAbits.RA1 != 0) && (Initial_Flag == 1))
+    {
+        while(1)
+        {
+        write_IIC(0x00,0x00 ); ;
+        }
+    }
      }
 }
 void The_Close(void)
@@ -144,4 +162,6 @@ void The_Close(void)
     DCT_OFF;
     Key_Run = 0;
     Once = 0;
+    Forbid_input=0;
+    WDTCONbits.SWDTEN  = 0;
 }

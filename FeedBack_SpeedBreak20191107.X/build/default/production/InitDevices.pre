@@ -1636,7 +1636,7 @@ void InitDevices(void)
 {
 systemOSC();
 PortInit();
-
+InitTimer0();
 InitTimer1();
 IIC_init();
 InitialiseADC();

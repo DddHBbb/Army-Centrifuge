@@ -1245,48 +1245,50 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RELAY_BAT `b  1 e ]
 "19 ADC.h
 [v _RELAY_AC `b  1 e ]
-"5 main.c
-[v _Start_Flag `uc  1 e ]
-"6 main.c
-[v _Initial_Flag `uc  1 e ]
-"7 main.c
-[v _Stop_Flag `uc  1 e ]
 "8 main.c
+[v _Start_Flag `uc  1 e ]
+"9 main.c
+[v _Initial_Flag `uc  1 e ]
+"10 main.c
+[v _Stop_Flag `uc  1 e ]
+"11 main.c
 [v _kai `uc  1 e ]
-"15 main.c
+"20 main.c
 [v _Once `uc  1 e ]
-"16 main.c
-[v _Not_two `uc  1 e ]
-"17 main.c
-[v _Count_Flag `uc  1 e ]
-"18 main.c
-[v _Work_Flag `uc  1 e ]
-"19 main.c
-[v _Start_KeyRun_Flag `uc  1 e ]
 "21 main.c
+[v _Not_two `uc  1 e ]
+"22 main.c
+[v _Count_Flag `uc  1 e ]
+"23 main.c
+[v _Work_Flag `uc  1 e ]
+"24 main.c
+[v _Start_KeyRun_Flag `uc  1 e ]
+"26 main.c
 [v _ADC_Val `ui  1 e ]
 [p mainexit ]
 "38 GlobalVar.h
 [v _InitDevices `(v  0 ef ]
-"9 main.c
+"12 main.c
 [v _Key_Run `uc  0 e ]
 "21 ADC.h
 [v _ReadADC `(ui  0 ef1`uc ]
 "31 GlobalVar.h
 [v _delaynms `(v  0 ef1`ui ]
-"10 main.c
+"13 main.c
 [v _Onekey_Flag `uc  0 e ]
 "28 GlobalVar.h
 [v _write_IIC `(v  0 ef2`uc`uc ]
 "35 GlobalVar.h
 [v _Motor_adjusting_speed `(v  0 ef ]
-"12 main.c
+"15 main.c
 [v _Open_Cover_Flag `uc  0 e ]
 "34 GlobalVar.h
 [v _MotorClose `(v  0 ef ]
-"13 main.c
+"18 main.c
+[v _Forbid_input `uc  0 e ]
+"16 main.c
 [v _Open_Cover_times `ui  0 e ]
-"4 main.c
+"7 main.c
 [v _The_Close `(v  0 ef ]
 "16 GlobalVar.h
 [v _VOLT `ui  0 e ]
@@ -2492,503 +2494,557 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;ADC.h: 19: bit RELAY_AC=0;
 [; ;ADC.h: 20: unsigned int get1_ad(void);
 [; ;ADC.h: 21: unsigned int ReadADC(unsigned char ADC_Channel);
-[; ;main.c: 4: void The_Close(void);
-"5 main.c
+[; ;main.c: 7: void The_Close(void);
+"8 main.c
 [i _Start_Flag
 -> -> 0 `i `uc
 ]
-[; ;main.c: 5: unsigned char Start_Flag=0;
-"6
+[; ;main.c: 8: unsigned char Start_Flag=0;
+"9
 [i _Initial_Flag
 -> -> 0 `i `uc
 ]
-[; ;main.c: 6: unsigned char Initial_Flag=0;
-"7
+[; ;main.c: 9: unsigned char Initial_Flag=0;
+"10
 [i _Stop_Flag
 -> -> 0 `i `uc
 ]
-[; ;main.c: 7: unsigned char Stop_Flag=0;
-"8
+[; ;main.c: 10: unsigned char Stop_Flag=0;
+"11
 [i _kai
 -> -> 0 `i `uc
 ]
-[; ;main.c: 8: unsigned char kai=0;
-[; ;main.c: 9: extern unsigned char Key_Run;
-[; ;main.c: 10: extern unsigned char Onekey_Flag;
-[; ;main.c: 12: extern unsigned char Open_Cover_Flag;
-[; ;main.c: 13: extern unsigned int Open_Cover_times;
-"15
+[; ;main.c: 11: unsigned char kai=0;
+[; ;main.c: 12: extern unsigned char Key_Run;
+[; ;main.c: 13: extern unsigned char Onekey_Flag;
+[; ;main.c: 15: extern unsigned char Open_Cover_Flag;
+[; ;main.c: 16: extern unsigned int Open_Cover_times;
+[; ;main.c: 18: extern unsigned char Forbid_input;
+"20
 [i _Once
 -> -> 0 `i `uc
 ]
-[; ;main.c: 15: unsigned char Once=0;
-"16
+[; ;main.c: 20: unsigned char Once=0;
+"21
 [i _Not_two
 -> -> 0 `i `uc
 ]
-[; ;main.c: 16: unsigned char Not_two=0;
-"17
+[; ;main.c: 21: unsigned char Not_two=0;
+"22
 [i _Count_Flag
 -> -> 0 `i `uc
 ]
-[; ;main.c: 17: unsigned char Count_Flag=0;
-"18
+[; ;main.c: 22: unsigned char Count_Flag=0;
+"23
 [i _Work_Flag
 -> -> 0 `i `uc
 ]
-[; ;main.c: 18: unsigned char Work_Flag=0;
-"19
+[; ;main.c: 23: unsigned char Work_Flag=0;
+"24
 [i _Start_KeyRun_Flag
 -> -> 0 `i `uc
 ]
-[; ;main.c: 19: unsigned char Start_KeyRun_Flag=0;
-[; ;main.c: 21: unsigned int ADC_Val;
-"23
+[; ;main.c: 24: unsigned char Start_KeyRun_Flag=0;
+[; ;main.c: 26: unsigned int ADC_Val;
+"28
 [v _main `(v  1 ef ]
 {
-[; ;main.c: 22: void main(void)
-[; ;main.c: 23: {
+[; ;main.c: 27: void main(void)
+[; ;main.c: 28: {
 [e :U _main ]
 [f ]
-"24
-[v _i `uc  1 a ]
-[; ;main.c: 24: unsigned char i;
-[; ;main.c: 25: InitDevices();
-"25
-[e ( _InitDevices ..  ]
-[; ;main.c: 26: while(1)
-"26
-[e :U 139 ]
-[; ;main.c: 27: {
-"27
-{
-[; ;main.c: 29: if(PORTAbits.RA5 == 1) {PORTBbits.RB2 = 1;asm ("NOP");}
 "29
+[v _i `uc  1 a ]
+[; ;main.c: 29: unsigned char i;
+[; ;main.c: 30: InitDevices();
+"30
+[e ( _InitDevices ..  ]
+[; ;main.c: 32: WDTCON = 0x12;
+"32
+[e = _WDTCON -> -> 18 `i `uc ]
+[; ;main.c: 33: while(1)
+"33
+[e :U 139 ]
+[; ;main.c: 34: {
+"34
+{
+[; ;main.c: 36: if(PORTAbits.RA5 == 1) {PORTBbits.RB2 = 1;asm ("NOP");}
+"36
 [e $ ! == -> . . _PORTAbits 0 5 `i -> 1 `i 141  ]
 {
 [e = . . _PORTBbits 0 2 -> -> 1 `i `uc ]
 [; NOP ;#
 }
 [e $U 142  ]
-"30
+"37
 [e :U 141 ]
-[; ;main.c: 30: else {PORTBbits.RB2 = 0;asm ("NOP");}
+[; ;main.c: 37: else {PORTBbits.RB2 = 0;asm ("NOP");}
 {
 [e = . . _PORTBbits 0 2 -> -> 0 `i `uc ]
 [; NOP ;#
 }
 [e :U 142 ]
-[; ;main.c: 32: if((Count_Flag == 0) && (Work_Flag == 1)) {PORTBbits.RB0 = 1;asm ("NOP");}
-"32
+[; ;main.c: 39: if((Count_Flag == 0) && (Work_Flag == 1)) {PORTBbits.RB0 = 1;asm ("NOP");}
+"39
 [e $ ! && == -> _Count_Flag `i -> 0 `i == -> _Work_Flag `i -> 1 `i 143  ]
 {
 [e = . . _PORTBbits 0 0 -> -> 1 `i `uc ]
 [; NOP ;#
 }
 [e $U 144  ]
-"33
+"40
 [e :U 143 ]
-[; ;main.c: 33: else if(Key_Run == 0 ) {PORTBbits.RB0 = 0;asm ("NOP");}
+[; ;main.c: 40: else if(Key_Run == 0 ) {PORTBbits.RB0 = 0;asm ("NOP");}
 [e $ ! == -> _Key_Run `i -> 0 `i 145  ]
 {
 [e = . . _PORTBbits 0 0 -> -> 0 `i `uc ]
 [; NOP ;#
 }
 [e :U 145 ]
-"35
+"42
 [e :U 144 ]
-[; ;main.c: 35: for(i=0;i<70;i++)
+[; ;main.c: 42: for(i=0;i<70;i++)
 {
 [e = _i -> -> 0 `i `uc ]
 [e $ < -> _i `i -> 70 `i 146  ]
 [e $U 147  ]
-"36
+"43
 [e :U 146 ]
-[; ;main.c: 36: {
+[; ;main.c: 43: {
 {
-[; ;main.c: 37: ADC_Val += ReadADC(3);
-"37
+[; ;main.c: 44: ADC_Val += ReadADC(3);
+"44
 [e =+ _ADC_Val ( _ReadADC (1 -> -> 3 `i `uc ]
-"38
+"45
 }
-"35
+"42
 [e ++ _i -> -> 1 `i `uc ]
 [e $ < -> _i `i -> 70 `i 146  ]
 [e :U 147 ]
-"38
-}
-[; ;main.c: 38: }
-[; ;main.c: 39: ADC_Val/=70;
-"39
-[e =/ _ADC_Val -> -> 70 `uc `ui ]
-[; ;main.c: 40: if((ADC_Val< 510))
-"40
-[e $ ! < _ADC_Val -> -> 510 `i `ui 149  ]
-[; ;main.c: 41: {
-"41
-{
-[; ;main.c: 42: if(PORTAbits.RA5 == 0)
-"42
-[e $ ! == -> . . _PORTAbits 0 5 `i -> 0 `i 150  ]
-[; ;main.c: 43: {
-"43
-{
-[; ;main.c: 44: PORTBbits.RB3 = ~PORTBbits.RB3;
-"44
-[e = . . _PORTBbits 0 3 -> ~ -> . . _PORTBbits 0 3 `i `uc ]
-[; ;main.c: 45: delaynms(50);
 "45
-[e ( _delaynms (1 -> -> 50 `i `ui ]
+}
+[; ;main.c: 45: }
+[; ;main.c: 46: ADC_Val/=70;
 "46
+[e =/ _ADC_Val -> -> 70 `uc `ui ]
+[; ;main.c: 47: if((ADC_Val< 510))
+"47
+[e $ ! < _ADC_Val -> -> 510 `i `ui 149  ]
+[; ;main.c: 48: {
+"48
+{
+[; ;main.c: 49: if(PORTAbits.RA5 == 0)
+"49
+[e $ ! == -> . . _PORTAbits 0 5 `i -> 0 `i 150  ]
+[; ;main.c: 50: {
+"50
+{
+[; ;main.c: 51: PORTBbits.RB3 = ~PORTBbits.RB3;
+"51
+[e = . . _PORTBbits 0 3 -> ~ -> . . _PORTBbits 0 3 `i `uc ]
+[; ;main.c: 52: delaynms(50);
+"52
+[e ( _delaynms (1 -> -> 50 `i `ui ]
+"53
 }
 [e :U 150 ]
-"47
+"54
 }
-[; ;main.c: 46: }
-[; ;main.c: 47: }
+[; ;main.c: 53: }
+[; ;main.c: 54: }
 [e $U 151  ]
-"48
+"55
 [e :U 149 ]
-[; ;main.c: 48: else if(ADC_Val > 595)
+[; ;main.c: 55: else if(ADC_Val > 595)
 [e $ ! > _ADC_Val -> -> 595 `i `ui 152  ]
-[; ;main.c: 49: {
-"49
+[; ;main.c: 56: {
+"56
 {
-[; ;main.c: 50: PORTBbits.RB3 = 0;asm ("NOP");
-"50
+[; ;main.c: 57: PORTBbits.RB3 = 0;asm ("NOP");
+"57
 [e = . . _PORTBbits 0 3 -> -> 0 `i `uc ]
 [; NOP ;#
-"51
+"58
 }
-[; ;main.c: 51: }
+[; ;main.c: 58: }
 [e $U 153  ]
-"52
+"59
 [e :U 152 ]
-[; ;main.c: 52: else if((ADC_Val < 580) && (ADC_Val> 540))
+[; ;main.c: 59: else if((ADC_Val < 580) && (ADC_Val> 540))
 [e $ ! && < _ADC_Val -> -> 580 `i `ui > _ADC_Val -> -> 540 `i `ui 154  ]
-[; ;main.c: 53: {
-"53
+[; ;main.c: 60: {
+"60
 {
-[; ;main.c: 54: if(PORTAbits.RA5 == 1) {PORTBbits.RB3 = 1;asm ("NOP");}
-"54
+[; ;main.c: 61: if(PORTAbits.RA5 == 1) {PORTBbits.RB3 = 1;asm ("NOP");}
+"61
 [e $ ! == -> . . _PORTAbits 0 5 `i -> 1 `i 155  ]
 {
 [e = . . _PORTBbits 0 3 -> -> 1 `i `uc ]
 [; NOP ;#
 }
 [e $U 156  ]
-"55
+"62
 [e :U 155 ]
-[; ;main.c: 55: else {PORTBbits.RB3 = 0;asm ("NOP");}
+[; ;main.c: 62: else {PORTBbits.RB3 = 0;asm ("NOP");}
 {
 [e = . . _PORTBbits 0 3 -> -> 0 `i `uc ]
 [; NOP ;#
 }
 [e :U 156 ]
-"56
+"63
 }
 [e :U 154 ]
-"59
+"66
 [e :U 153 ]
 [e :U 151 ]
-[; ;main.c: 56: }
-[; ;main.c: 59: if((Onekey_Flag == 1) &&(Work_Flag == 0))
+[; ;main.c: 63: }
+[; ;main.c: 66: if((Onekey_Flag == 1) &&(Work_Flag == 0))
 [e $ ! && == -> _Onekey_Flag `i -> 1 `i == -> _Work_Flag `i -> 0 `i 157  ]
-[; ;main.c: 60: {
-"60
-{
-[; ;main.c: 61: PORTCbits.RC0= 1;asm ("NOP");
-"61
-[e = . . _PORTCbits 0 0 -> -> 1 `i `uc ]
-[; NOP ;#
-[; ;main.c: 62: PORTAbits.RA4= 1;asm ("NOP");
-"62
-[e = . . _PORTAbits 0 4 -> -> 1 `i `uc ]
-[; NOP ;#
-[; ;main.c: 63: PORTBbits.RB5 = 1;asm ("NOP");
-"63
-[e = . . _PORTBbits 0 5 -> -> 1 `i `uc ]
-[; NOP ;#
-[; ;main.c: 64: Not_two = 1;
-"64
-[e = _Not_two -> -> 1 `i `uc ]
-"65
-}
-[e :U 157 ]
-[; ;main.c: 65: }
-[; ;main.c: 66: if((Onekey_Flag == 2) && (Work_Flag == 0))
-"66
-[e $ ! && == -> _Onekey_Flag `i -> 2 `i == -> _Work_Flag `i -> 0 `i 158  ]
 [; ;main.c: 67: {
 "67
 {
-[; ;main.c: 68: PORTAbits.RA2 = 1;asm ("NOP");
+[; ;main.c: 68: PORTCbits.RC0= 1;asm ("NOP");
 "68
+[e = . . _PORTCbits 0 0 -> -> 1 `i `uc ]
+[; NOP ;#
+[; ;main.c: 69: PORTAbits.RA4= 1;asm ("NOP");
+"69
+[e = . . _PORTAbits 0 4 -> -> 1 `i `uc ]
+[; NOP ;#
+[; ;main.c: 70: PORTBbits.RB5 = 1;asm ("NOP");
+"70
+[e = . . _PORTBbits 0 5 -> -> 1 `i `uc ]
+[; NOP ;#
+[; ;main.c: 71: Not_two = 1;
+"71
+[e = _Not_two -> -> 1 `i `uc ]
+"72
+}
+[e :U 157 ]
+[; ;main.c: 72: }
+[; ;main.c: 73: if((Onekey_Flag == 2) && (Work_Flag == 0))
+"73
+[e $ ! && == -> _Onekey_Flag `i -> 2 `i == -> _Work_Flag `i -> 0 `i 158  ]
+[; ;main.c: 74: {
+"74
+{
+[; ;main.c: 75: PORTAbits.RA2 = 1;asm ("NOP");
+"75
 [e = . . _PORTAbits 0 2 -> -> 1 `i `uc ]
 [; NOP ;#
-[; ;main.c: 69: delaynms(10);
-"69
+[; ;main.c: 76: delaynms(10);
+"76
 [e ( _delaynms (1 -> -> 10 `i `ui ]
-[; ;main.c: 70: PORTAbits.RA2 = 0;asm ("NOP");
-"70
+[; ;main.c: 77: PORTAbits.RA2 = 0;asm ("NOP");
+"77
 [e = . . _PORTAbits 0 2 -> -> 0 `i `uc ]
 [; NOP ;#
-[; ;main.c: 71: PORTCbits.RC0 = 0;asm ("NOP");
-"71
+[; ;main.c: 78: PORTCbits.RC0 = 0;asm ("NOP");
+"78
 [e = . . _PORTCbits 0 0 -> -> 0 `i `uc ]
 [; NOP ;#
-[; ;main.c: 72: PORTAbits.RA4 = 0;asm ("NOP");
-"72
+[; ;main.c: 79: PORTAbits.RA4 = 0;asm ("NOP");
+"79
 [e = . . _PORTAbits 0 4 -> -> 0 `i `uc ]
 [; NOP ;#
-[; ;main.c: 73: PORTBbits.RB5 = 0;asm ("NOP");
-"73
+[; ;main.c: 80: PORTBbits.RB5 = 0;asm ("NOP");
+"80
 [e = . . _PORTBbits 0 5 -> -> 0 `i `uc ]
 [; NOP ;#
-[; ;main.c: 74: Not_two = 0;
-"74
+[; ;main.c: 81: Not_two = 0;
+"81
 [e = _Not_two -> -> 0 `i `uc ]
-[; ;main.c: 75: Onekey_Flag = 0;
-"75
+[; ;main.c: 82: Onekey_Flag = 0;
+"82
 [e = _Onekey_Flag -> -> 0 `i `uc ]
-"76
+"83
 }
 [e :U 158 ]
-[; ;main.c: 76: }
-[; ;main.c: 78: if((PORTAbits.RA1 == 0) && (Not_two == 1))
-"78
+[; ;main.c: 83: }
+[; ;main.c: 85: if((PORTAbits.RA1 == 0) && (Not_two == 1))
+"85
 [e $ ! && == -> . . _PORTAbits 0 1 `i -> 0 `i == -> _Not_two `i -> 1 `i 159  ]
-[; ;main.c: 79: {
-"79
+[; ;main.c: 86: {
+"86
 {
-[; ;main.c: 80: if(Key_Run == 1)
-"80
+[; ;main.c: 87: WDTCONbits.SWDTEN = 1;
+"87
+[e = . . _WDTCONbits 0 0 -> -> 1 `i `uc ]
+[; ;main.c: 88: if(Key_Run == 1)
+"88
 [e $ ! == -> _Key_Run `i -> 1 `i 160  ]
-[; ;main.c: 81: {
-"81
+[; ;main.c: 89: {
+"89
 {
-[; ;main.c: 82: while(Initial_Flag == 0)
-"82
+[; ;main.c: 90: asm("clrwdt");
+"90
+[; clrwdt ;#
+[; ;main.c: 91: while(Initial_Flag == 0)
+"91
 [e $U 161  ]
 [e :U 162 ]
-[; ;main.c: 83: {
-"83
-{
-[; ;main.c: 84: Work_Flag = 1;
-"84
-[e = _Work_Flag -> -> 1 `i `uc ]
-[; ;main.c: 85: Count_Flag = 1;
-"85
-[e = _Count_Flag -> -> 1 `i `uc ]
-[; ;main.c: 86: write_IIC(0,0);
-"86
-[e ( _write_IIC (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;main.c: 87: delaynms(1);
-"87
-[e ( _delaynms (1 -> -> 1 `i `ui ]
-[; ;main.c: 88: write_IIC(0x03,0x33 );
-"88
-[e ( _write_IIC (2 , -> -> 3 `i `uc -> -> 51 `i `uc ]
-[; ;main.c: 89: delaynms(1);
-"89
-[e ( _delaynms (1 -> -> 1 `i `ui ]
-[; ;main.c: 90: write_IIC(0x04,0x4c );
-"90
-[e ( _write_IIC (2 , -> -> 4 `i `uc -> -> 76 `i `uc ]
-[; ;main.c: 91: delaynms(1);
-"91
-[e ( _delaynms (1 -> -> 1 `i `ui ]
-[; ;main.c: 92: Initial_Flag = 1;
+[; ;main.c: 92: {
 "92
-[e = _Initial_Flag -> -> 1 `i `uc ]
-[; ;main.c: 93: kai = 1;
+{
+[; ;main.c: 93: Work_Flag = 1;
 "93
-[e = _kai -> -> 1 `i `uc ]
-[; ;main.c: 94: break;
+[e = _Work_Flag -> -> 1 `i `uc ]
+[; ;main.c: 94: Count_Flag = 1;
 "94
-[e $U 163  ]
+[e = _Count_Flag -> -> 1 `i `uc ]
+[; ;main.c: 95: write_IIC(0x03,0x33 );
 "95
+[e ( _write_IIC (2 , -> -> 3 `i `uc -> -> 51 `i `uc ]
+[; ;main.c: 96: delaynms(1);
+"96
+[e ( _delaynms (1 -> -> 1 `i `ui ]
+[; ;main.c: 97: write_IIC(0x04,0x4c );
+"97
+[e ( _write_IIC (2 , -> -> 4 `i `uc -> -> 76 `i `uc ]
+[; ;main.c: 98: delaynms(1);
+"98
+[e ( _delaynms (1 -> -> 1 `i `ui ]
+[; ;main.c: 99: Initial_Flag = 1;
+"99
+[e = _Initial_Flag -> -> 1 `i `uc ]
+[; ;main.c: 100: kai = 1;
+"100
+[e = _kai -> -> 1 `i `uc ]
+[; ;main.c: 101: break;
+"101
+[e $U 163  ]
+"102
 }
 [e :U 161 ]
-"82
+"91
 [e $ == -> _Initial_Flag `i -> 0 `i 162  ]
 [e :U 163 ]
-[; ;main.c: 95: }
-[; ;main.c: 96: if((Start_Flag == 0)&&(kai == 1))
-"96
-[e $ ! && == -> _Start_Flag `i -> 0 `i == -> _kai `i -> 1 `i 164  ]
-[; ;main.c: 97: {
-"97
-{
-[; ;main.c: 98: Motor_adjusting_speed();
-"98
-[e ( _Motor_adjusting_speed ..  ]
-"99
-}
-[; ;main.c: 99: }
-[e $U 165  ]
-"100
-[e :U 164 ]
-[; ;main.c: 100: else if(Stop_Flag == 1)
-[e $ ! == -> _Stop_Flag `i -> 1 `i 166  ]
-[; ;main.c: 101: {
-"101
-{
-[; ;main.c: 102: Open_Cover_Flag = 1;
-"102
-[e = _Open_Cover_Flag -> -> 1 `i `uc ]
-[; ;main.c: 103: if(Once == 0)
+[; ;main.c: 102: }
+[; ;main.c: 103: if((Start_Flag == 0)&&(kai == 1))
 "103
-[e $ ! == -> _Once `i -> 0 `i 167  ]
+[e $ ! && == -> _Start_Flag `i -> 0 `i == -> _kai `i -> 1 `i 164  ]
 [; ;main.c: 104: {
 "104
 {
-[; ;main.c: 105: MotorClose();
+[; ;main.c: 105: Motor_adjusting_speed();
 "105
-[e ( _MotorClose ..  ]
-[; ;main.c: 106: Once = 1;
+[e ( _Motor_adjusting_speed ..  ]
 "106
-[e = _Once -> -> 1 `i `uc ]
+}
+[; ;main.c: 106: }
+[e $U 165  ]
 "107
+[e :U 164 ]
+[; ;main.c: 107: else if(Stop_Flag == 1)
+[e $ ! == -> _Stop_Flag `i -> 1 `i 166  ]
+[; ;main.c: 108: {
+"108
+{
+[; ;main.c: 109: Open_Cover_Flag = 1;
+"109
+[e = _Open_Cover_Flag -> -> 1 `i `uc ]
+[; ;main.c: 110: if(Once == 0)
+"110
+[e $ ! == -> _Once `i -> 0 `i 167  ]
+[; ;main.c: 111: {
+"111
+{
+[; ;main.c: 112: MotorClose();
+"112
+[e ( _MotorClose ..  ]
+[; ;main.c: 113: Once = 1;
+"113
+[e = _Once -> -> 1 `i `uc ]
+[; ;main.c: 114: Forbid_input = 1;
+"114
+[e = _Forbid_input -> -> 1 `i `uc ]
+"115
 }
 [e :U 167 ]
-[; ;main.c: 107: }
-[; ;main.c: 108: Count_Flag=0;
-"108
+[; ;main.c: 115: }
+[; ;main.c: 116: Count_Flag=0;
+"116
 [e = _Count_Flag -> -> 0 `i `uc ]
-[; ;main.c: 109: if(Open_Cover_times == 2700)
-"109
-[e $ ! == _Open_Cover_times -> -> 2700 `i `ui 168  ]
-[; ;main.c: 110: {
-"110
+[; ;main.c: 117: if(Open_Cover_times >= 2700)
+"117
+[e $ ! >= _Open_Cover_times -> -> 2700 `i `ui 168  ]
+[; ;main.c: 118: {
+"118
 {
-[; ;main.c: 111: The_Close();
-"111
+[; ;main.c: 120: The_Close();
+"120
 [e ( _The_Close ..  ]
-"112
+"121
 }
 [e :U 168 ]
-"113
-}
-[e :U 166 ]
-"114
-[e :U 165 ]
-}
-[; ;main.c: 112: }
-[; ;main.c: 113: }
-[; ;main.c: 114: }
-[e $U 169  ]
-"115
-[e :U 160 ]
-[; ;main.c: 115: else if(Key_Run == 2)
-[e $ ! == -> _Key_Run `i -> 2 `i 170  ]
-[; ;main.c: 116: {
-"116
-{
-[; ;main.c: 117: Open_Cover_Flag = 1;
-"117
-[e = _Open_Cover_Flag -> -> 1 `i `uc ]
-[; ;main.c: 118: if(Once == 0)
-"118
-[e $ ! == -> _Once `i -> 0 `i 171  ]
-[; ;main.c: 119: {
-"119
-{
-[; ;main.c: 120: MotorClose();
-"120
-[e ( _MotorClose ..  ]
-[; ;main.c: 121: Once = 1;
-"121
-[e = _Once -> -> 1 `i `uc ]
 "122
 }
-[e :U 171 ]
-[; ;main.c: 122: }
-[; ;main.c: 123: Count_Flag=0;
+[e :U 166 ]
 "123
-[e = _Count_Flag -> -> 0 `i `uc ]
-[; ;main.c: 124: if(Open_Cover_times == 2700)
+[e :U 165 ]
+}
+[; ;main.c: 121: }
+[; ;main.c: 122: }
+[; ;main.c: 123: }
+[e $U 169  ]
 "124
-[e $ ! == _Open_Cover_times -> -> 2700 `i `ui 172  ]
+[e :U 160 ]
+[; ;main.c: 124: else if(Key_Run == 2)
+[e $ ! == -> _Key_Run `i -> 2 `i 170  ]
 [; ;main.c: 125: {
 "125
 {
-[; ;main.c: 126: The_Close();
+[; ;main.c: 126: asm("clrwdt");
 "126
-[e ( _The_Close ..  ]
+[; clrwdt ;#
+[; ;main.c: 127: Open_Cover_Flag = 1;
 "127
+[e = _Open_Cover_Flag -> -> 1 `i `uc ]
+[; ;main.c: 128: Forbid_input = 1;
+"128
+[e = _Forbid_input -> -> 1 `i `uc ]
+[; ;main.c: 129: if(Once == 0)
+"129
+[e $ ! == -> _Once `i -> 0 `i 171  ]
+[; ;main.c: 130: {
+"130
+{
+[; ;main.c: 131: MotorClose();
+"131
+[e ( _MotorClose ..  ]
+[; ;main.c: 132: Once = 1;
+"132
+[e = _Once -> -> 1 `i `uc ]
+"133
+}
+[e :U 171 ]
+[; ;main.c: 133: }
+[; ;main.c: 134: Count_Flag=0;
+"134
+[e = _Count_Flag -> -> 0 `i `uc ]
+[; ;main.c: 135: if(Open_Cover_times >= 2700)
+"135
+[e $ ! >= _Open_Cover_times -> -> 2700 `i `ui 172  ]
+[; ;main.c: 136: {
+"136
+{
+[; ;main.c: 137: The_Close();
+"137
+[e ( _The_Close ..  ]
+"138
 }
 [e :U 172 ]
-"128
+"139
 }
 [e :U 170 ]
-"129
+"140
 [e :U 169 ]
 }
+[; ;main.c: 138: }
+[; ;main.c: 139: }
+[; ;main.c: 140: }
+[e $U 173  ]
+"141
 [e :U 159 ]
-"130
+[; ;main.c: 141: else if (PORTAbits.RA1 != 0) write_IIC(0x00,0x00 );
+[e $ ! != -> . . _PORTAbits 0 1 `i -> 0 `i 174  ]
+[e ( _write_IIC (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+[e $U 175  ]
+"142
+[e :U 174 ]
+[; ;main.c: 142: else if((PORTAbits.RA1 != 0) && (Initial_Flag == 1))
+[e $ ! && != -> . . _PORTAbits 0 1 `i -> 0 `i == -> _Initial_Flag `i -> 1 `i 176  ]
+[; ;main.c: 143: {
+"143
+{
+[; ;main.c: 144: while(1)
+"144
+[e :U 178 ]
+[; ;main.c: 145: {
+"145
+{
+[; ;main.c: 146: write_IIC(0x00,0x00 ); ;
+"146
+[e ( _write_IIC (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+"147
+}
+[e :U 177 ]
+"144
+[e $U 178  ]
+[e :U 179 ]
+"148
+}
+[e :U 176 ]
+"149
+[e :U 175 ]
+[e :U 173 ]
 }
 [e :U 138 ]
-"26
+"33
 [e $U 139  ]
 [e :U 140 ]
-[; ;main.c: 127: }
-[; ;main.c: 128: }
-[; ;main.c: 129: }
-[; ;main.c: 130: }
-[; ;main.c: 131: }
-"131
+[; ;main.c: 147: }
+[; ;main.c: 148: }
+[; ;main.c: 149: }
+[; ;main.c: 150: }
+"150
 [e :UE 137 ]
 }
-"133
+"152
 [v _The_Close `(v  1 ef ]
 {
-[; ;main.c: 132: void The_Close(void)
-[; ;main.c: 133: {
+[; ;main.c: 151: void The_Close(void)
+[; ;main.c: 152: {
 [e :U _The_Close ]
 [f ]
-[; ;main.c: 134: kai = 0;
-"134
+[; ;main.c: 153: kai = 0;
+"153
 [e = _kai -> -> 0 `i `uc ]
-[; ;main.c: 135: Stop_Flag = 0;
-"135
+[; ;main.c: 154: Stop_Flag = 0;
+"154
 [e = _Stop_Flag -> -> 0 `i `uc ]
-[; ;main.c: 136: Start_Flag = 0;
-"136
+[; ;main.c: 155: Start_Flag = 0;
+"155
 [e = _Start_Flag -> -> 0 `i `uc ]
-[; ;main.c: 137: Initial_Flag = 0;
-"137
+[; ;main.c: 156: Initial_Flag = 0;
+"156
 [e = _Initial_Flag -> -> 0 `i `uc ]
-[; ;main.c: 138: Work_Flag = 0;
-"138
+[; ;main.c: 157: Work_Flag = 0;
+"157
 [e = _Work_Flag -> -> 0 `i `uc ]
-[; ;main.c: 139: VOLT=1150;
-"139
+[; ;main.c: 158: VOLT=1150;
+"158
 [e = _VOLT -> -> 1150 `i `ui ]
-[; ;main.c: 140: Open_Cover_Flag = 0;
-"140
+[; ;main.c: 159: Open_Cover_Flag = 0;
+"159
 [e = _Open_Cover_Flag -> -> 0 `i `uc ]
-[; ;main.c: 141: Open_Cover_times = 0;
-"141
+[; ;main.c: 160: Open_Cover_times = 0;
+"160
 [e = _Open_Cover_times -> -> 0 `i `ui ]
-[; ;main.c: 142: PORTAbits.RA2 = 1;asm ("NOP");
-"142
+[; ;main.c: 161: PORTAbits.RA2 = 1;asm ("NOP");
+"161
 [e = . . _PORTAbits 0 2 -> -> 1 `i `uc ]
 [; NOP ;#
-[; ;main.c: 143: delaynms(10);
-"143
+[; ;main.c: 162: delaynms(10);
+"162
 [e ( _delaynms (1 -> -> 10 `i `ui ]
-[; ;main.c: 144: PORTAbits.RA2 = 0;asm ("NOP");
-"144
+[; ;main.c: 163: PORTAbits.RA2 = 0;asm ("NOP");
+"163
 [e = . . _PORTAbits 0 2 -> -> 0 `i `uc ]
 [; NOP ;#
-[; ;main.c: 145: Key_Run = 0;
-"145
+[; ;main.c: 164: Key_Run = 0;
+"164
 [e = _Key_Run -> -> 0 `i `uc ]
-[; ;main.c: 146: Once = 0;
-"146
+[; ;main.c: 165: Once = 0;
+"165
 [e = _Once -> -> 0 `i `uc ]
-[; ;main.c: 147: }
-"147
-[e :UE 173 ]
+[; ;main.c: 166: Forbid_input=0;
+"166
+[e = _Forbid_input -> -> 0 `i `uc ]
+[; ;main.c: 167: WDTCONbits.SWDTEN = 0;
+"167
+[e = . . _WDTCONbits 0 0 -> -> 0 `i `uc ]
+[; ;main.c: 168: }
+"168
+[e :UE 180 ]
 }

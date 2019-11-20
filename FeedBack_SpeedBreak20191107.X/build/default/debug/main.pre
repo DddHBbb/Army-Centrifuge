@@ -1545,55 +1545,34 @@ extern unsigned char Onekey_Flag;
 extern unsigned char Open_Cover_Flag;
 extern unsigned int Open_Cover_times;
 
+extern unsigned char Forbid_input;
+
 unsigned char Once=0;
 unsigned char Not_two=0;
 unsigned char Count_Flag=0;
 unsigned char Work_Flag=0;
 unsigned char Start_KeyRun_Flag=0;
 
-unsigned int ADC_Val;
+
+
 void main(void)
 {
 unsigned char i;
 InitDevices();
+PORTBbits.RB2 = 1;asm ("NOP");
+PORTBbits.RB3 = 0;asm ("NOP");
 while(1)
 {
-
-if(PORTAbits.RA5 == 1) {PORTBbits.RB2 = 1;asm ("NOP");}
-else {PORTBbits.RB2 = 0;asm ("NOP");}
 
 if((Count_Flag == 0) && (Work_Flag == 1)) {PORTBbits.RB0 = 1;asm ("NOP");}
 else if(Key_Run == 0 ) {PORTBbits.RB0 = 0;asm ("NOP");}
 
-for(i=0;i<70;i++)
-{
-ADC_Val += ReadADC(3);
-}
-ADC_Val/=70;
-if((ADC_Val< 510))
-{
-if(PORTAbits.RA5 == 0)
-{
-PORTBbits.RB5 = ~PORTBbits.RB5;
-delaynms(50);
-}
-}
-else if(ADC_Val > 595)
-{
-PORTBbits.RB5 = 0;asm ("NOP");
-}
-else if((ADC_Val < 580) && (ADC_Val> 540))
-{
-if(PORTAbits.RA5 == 1) {PORTBbits.RB5 = 1;asm ("NOP");}
-else {PORTBbits.RB5 = 0;asm ("NOP");}
-}
-
-
+# 61
 if((Onekey_Flag == 1) &&(Work_Flag == 0))
 {
 PORTCbits.RC0= 1;asm ("NOP");
 PORTAbits.RA4= 1;asm ("NOP");
-PORTBbits.RB3 = 1;asm ("NOP");
+PORTBbits.RB5 = 1;asm ("NOP");
 Not_two = 1;
 }
 if((Onekey_Flag == 2) && (Work_Flag == 0))
@@ -1603,7 +1582,7 @@ delaynms(10);
 PORTAbits.RA2 = 0;asm ("NOP");
 PORTCbits.RC0 = 0;asm ("NOP");
 PORTAbits.RA4 = 0;asm ("NOP");
-PORTBbits.RB3 = 0;asm ("NOP");
+PORTBbits.RB5 = 0;asm ("NOP");
 Not_two = 0;
 Onekey_Flag = 0;
 }
@@ -1616,8 +1595,6 @@ while(Initial_Flag == 0)
 {
 Work_Flag = 1;
 Count_Flag = 1;
-write_IIC(0,0);
-delaynms(1);
 write_IIC(0x03,0x33 );
 delaynms(1);
 write_IIC(0x04,0x4c );
@@ -1647,6 +1624,7 @@ The_Close();
 }
 else if(Key_Run == 2)
 {
+Forbid_input = 1;
 Open_Cover_Flag = 1;
 if(Once == 0)
 {
@@ -1660,7 +1638,10 @@ The_Close();
 }
 }
 }
+
+# 139
 }
+
 }
 void The_Close(void)
 {
@@ -1677,4 +1658,5 @@ delaynms(10);
 PORTAbits.RA2 = 0;asm ("NOP");
 Key_Run = 0;
 Once = 0;
+Forbid_input = 0;
 }

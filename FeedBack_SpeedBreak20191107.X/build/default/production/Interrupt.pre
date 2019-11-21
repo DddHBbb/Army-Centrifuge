@@ -1605,6 +1605,7 @@ if(PORTBbits.RB1 == 1) Key_Up = 0;
 if((PORTBbits.RB1 == 0) && (Key_Up == 0))
 {
 Key_Run_times++;
+asm("clrwdt");
 if(Key_Run_times == 40)
 {
 Key_Run++;
@@ -1620,6 +1621,7 @@ if(PORTCbits.RC1 == 1) Onekey_Key_Up = 0;
 if((PORTCbits.RC1 == 0) && (Onekey_Key_Up == 0))
 {
 Onekey_times++;
+asm("clrwdt");
 if(Onekey_times == 40)
 {
 Onekey_Flag++;

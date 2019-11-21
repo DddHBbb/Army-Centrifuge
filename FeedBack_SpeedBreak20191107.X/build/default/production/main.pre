@@ -1572,23 +1572,23 @@ for(i=0;i<70;i++)
 {
 ADC_Val += ReadADC(3);
 }
-ADC_Val/=70;
-if((ADC_Val< 510))
+ADC_Val /=70;
+if(PORTAbits.RA5 == 1)
 {
-if(PORTAbits.RA5 == 0)
+if(ADC_Val < 595) {PORTBbits.RB3 = 1;asm ("NOP");}
+else {PORTBbits.RB3 = 0;asm ("NOP");}
+}
+else
 {
-PORTBbits.RB3 = ~PORTBbits.RB3;
+if(ADC_Val< 510)
+{
+PORTBbits.RB3 = 1;asm ("NOP");
+delaynms(50);
+PORTBbits.RB3 = 0;asm ("NOP");
 delaynms(50);
 }
-}
-else if(ADC_Val > 595)
-{
-PORTBbits.RB3 = 0;asm ("NOP");
-}
-else if((ADC_Val < 580) && (ADC_Val> 540))
-{
-if(PORTAbits.RA5 == 1) {PORTBbits.RB3 = 1;asm ("NOP");}
-else {PORTBbits.RB3 = 0;asm ("NOP");}
+else if((ADC_Val >= 510) && (ADC_Val <595)) {PORTBbits.RB3 = 1;asm ("NOP");}
+else if(ADC_Val >= 595) {PORTBbits.RB3 = 0;asm ("NOP");}
 }
 
 
@@ -1613,7 +1613,6 @@ Onekey_Flag = 0;
 
 if((PORTAbits.RA1 == 0) && (Not_two == 1))
 {
-
 if(Key_Run == 1)
 {
 WDTCONbits.SWDTEN = 1;
@@ -1632,6 +1631,7 @@ break;
 }
 if((Start_Flag == 0)&&(kai == 1))
 {
+asm("clrwdt");
 Motor_adjusting_speed();
 }
 else if(Stop_Flag == 1)
@@ -1646,7 +1646,6 @@ Forbid_input = 1;
 Count_Flag=0;
 if(Open_Cover_times >= 2700)
 {
-
 The_Close();
 }
 }

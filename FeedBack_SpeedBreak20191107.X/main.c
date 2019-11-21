@@ -39,28 +39,28 @@ void main(void)
 		else if(Key_Run == 0 )                    {Motor_LED_OFF;}
 		//电池状态检测 
         for(i=0;i<70;i++)
-		{
-			ADC_Val += ReadADC(3);
-		}
-		ADC_Val/=70;
-		if((ADC_Val< 510)) 
-		{
-			if(PORTAbits.RA5 == 0)
-			{
-                PORTBbits.RB3 = ~PORTBbits.RB3;
+        {
+		ADC_Val += ReadADC(3);
+        }
+        ADC_Val /=70;
+        if(PORTAbits.RA5 == 1)
+        {
+            if(ADC_Val < 595)  {BAT_LED_ON;}
+            else               {BAT_LED_OFF;}
+        }
+        else
+        {
+            if(ADC_Val< 510) 
+		   {
+                BAT_LED_ON;
                 delaynms(50);
-			}
-		}
-		else if(ADC_Val > 595) 
-		{
-			BAT_LED_OFF;
-		} 
-		else  if((ADC_Val < 580) && (ADC_Val> 540))
-		{
-			if(PORTAbits.RA5 == 1)  {BAT_LED_ON;}
-			else                    {BAT_LED_OFF;}
-		}
-		//    CLRWDT();
+                BAT_LED_OFF;
+                delaynms(50);
+		    }        
+            else if((ADC_Val >= 510) && (ADC_Val <595))  {BAT_LED_ON;}
+            else if(ADC_Val >= 595)                      {BAT_LED_OFF;}
+        }
+
         ///一键开关
 		if((Onekey_Flag == 1) &&(Work_Flag == 0))
 		{
@@ -101,6 +101,7 @@ void main(void)
 				}
 				if((Start_Flag == 0)&&(kai == 1))         
 				{
+                    CLRWDT();
 					Motor_adjusting_speed();
 				}
 				else  if(Stop_Flag == 1)      
@@ -114,8 +115,7 @@ void main(void)
 					}
 					Count_Flag=0; 
 					if(Open_Cover_times >= 2700)
-					{     
-						
+					{     				
 						The_Close();
 					} 
 				}

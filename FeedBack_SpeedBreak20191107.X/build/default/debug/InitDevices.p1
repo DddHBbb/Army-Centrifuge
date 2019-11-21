@@ -2417,276 +2417,285 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;InitDevices.h: 16: void InitDevices(void);
 [; ;InitDevices.h: 17: void IIC_init(void);
 [; ;InitDevices.h: 18: void InitialiseADC(void);
-[; ;InitDevices.c: 6: extern unsigned char RecFlag;
-[; ;InitDevices.c: 8: typedef struct{
-[; ;InitDevices.c: 9: unsigned char WorkMode;
-[; ;InitDevices.c: 10: unsigned char WorkStates;
-[; ;InitDevices.c: 11: unsigned char SetDis;
-[; ;InitDevices.c: 12: unsigned char Direction;
-[; ;InitDevices.c: 13: unsigned char RunTime;
-[; ;InitDevices.c: 14: unsigned int HallCounter;
-[; ;InitDevices.c: 15: unsigned int SetHallCounter;
-[; ;InitDevices.c: 16: unsigned int MinDepth;
-[; ;InitDevices.c: 17: unsigned int MaxDepth;
-[; ;InitDevices.c: 18: unsigned int StartDepth;
-[; ;InitDevices.c: 19: unsigned char RecTime;
-[; ;InitDevices.c: 20: unsigned char PressCounter;
-[; ;InitDevices.c: 21: unsigned char DisErrorStates;
-[; ;InitDevices.c: 22: unsigned char CurErroeStates;
-[; ;InitDevices.c: 23: }States;
-[; ;InitDevices.c: 24: extern States SystemStates;
-"27 InitDevices.c
+[; ;InitDevices.c: 4: extern unsigned char RecFlag;
+[; ;InitDevices.c: 6: typedef struct{
+[; ;InitDevices.c: 7: unsigned char WorkMode;
+[; ;InitDevices.c: 8: unsigned char WorkStates;
+[; ;InitDevices.c: 9: unsigned char SetDis;
+[; ;InitDevices.c: 10: unsigned char Direction;
+[; ;InitDevices.c: 11: unsigned char RunTime;
+[; ;InitDevices.c: 12: unsigned int HallCounter;
+[; ;InitDevices.c: 13: unsigned int SetHallCounter;
+[; ;InitDevices.c: 14: unsigned int MinDepth;
+[; ;InitDevices.c: 15: unsigned int MaxDepth;
+[; ;InitDevices.c: 16: unsigned int StartDepth;
+[; ;InitDevices.c: 17: unsigned char RecTime;
+[; ;InitDevices.c: 18: unsigned char PressCounter;
+[; ;InitDevices.c: 19: unsigned char DisErrorStates;
+[; ;InitDevices.c: 20: unsigned char CurErroeStates;
+[; ;InitDevices.c: 21: }States;
+[; ;InitDevices.c: 22: extern States SystemStates;
+"25 InitDevices.c
 [v _systemOSC `(v  1 ef ]
 {
-[; ;InitDevices.c: 26: void systemOSC(void)
-[; ;InitDevices.c: 27: {
+[; ;InitDevices.c: 24: void systemOSC(void)
+[; ;InitDevices.c: 25: {
 [e :U _systemOSC ]
 [f ]
-[; ;InitDevices.c: 28: OSCCON = 0X71;
-"28
+[; ;InitDevices.c: 26: OSCCON = 0X71;
+"26
 [e = _OSCCON -> -> 113 `i `uc ]
-[; ;InitDevices.c: 29: }
-"29
+[; ;InitDevices.c: 27: }
+"27
 [e :UE 138 ]
 }
-"32
+"30
 [v _PortInit `(v  1 ef ]
 {
-[; ;InitDevices.c: 31: void PortInit(void)
-[; ;InitDevices.c: 32: {
+[; ;InitDevices.c: 29: void PortInit(void)
+[; ;InitDevices.c: 30: {
 [e :U _PortInit ]
 [f ]
-[; ;InitDevices.c: 33: PORTA = 0x00;
-"33
+[; ;InitDevices.c: 31: PORTA = 0x00;
+"31
 [e = _PORTA -> -> 0 `i `uc ]
-[; ;InitDevices.c: 34: PORTB = 0x00;
-"34
+[; ;InitDevices.c: 32: PORTB = 0x00;
+"32
 [e = _PORTB -> -> 0 `i `uc ]
-[; ;InitDevices.c: 35: TRISA |= 0xE2;
-"35
-[e =| _TRISA -> -> 226 `i `uc ]
-[; ;InitDevices.c: 36: TRISB = 0X12;
-"36
+[; ;InitDevices.c: 33: TRISA = 0xEB;
+"33
+[e = _TRISA -> -> 235 `i `uc ]
+[; ;InitDevices.c: 34: TRISB = 0X12;
+"34
 [e = _TRISB -> -> 18 `i `uc ]
-[; ;InitDevices.c: 37: PORTC = 0X00;
-"37
+[; ;InitDevices.c: 35: PORTC = 0X00;
+"35
 [e = _PORTC -> -> 0 `i `uc ]
-[; ;InitDevices.c: 38: TRISC = 0XE2;
-"38
+[; ;InitDevices.c: 36: TRISC = 0XE2;
+"36
 [e = _TRISC -> -> 226 `i `uc ]
-[; ;InitDevices.c: 40: ANSELH = 0x00;
-"40
+[; ;InitDevices.c: 37: ANSELH = 0x00;
+"37
 [e = _ANSELH -> -> 0 `i `uc ]
-[; ;InitDevices.c: 43: }
-"43
+[; ;InitDevices.c: 40: }
+"40
 [e :UE 139 ]
 }
-"46
+"43
 [v _InitialiseADC `(v  1 ef ]
 {
-[; ;InitDevices.c: 45: void InitialiseADC(void)
-[; ;InitDevices.c: 46: {
+[; ;InitDevices.c: 42: void InitialiseADC(void)
+[; ;InitDevices.c: 43: {
 [e :U _InitialiseADC ]
 [f ]
-[; ;InitDevices.c: 50: ANSEL = 0x08;
-"50
+[; ;InitDevices.c: 47: ANSEL = 0x08;
+"47
 [e = _ANSEL -> -> 8 `i `uc ]
-[; ;InitDevices.c: 52: ADCON1 = 0x80;
-"52
+[; ;InitDevices.c: 49: ADCON1 = 0x80;
+"49
 [e = _ADCON1 -> -> 128 `i `uc ]
-[; ;InitDevices.c: 53: ADRESL = 0;
-"53
+[; ;InitDevices.c: 50: ADRESL = 0;
+"50
 [e = _ADRESL -> -> 0 `i `uc ]
-[; ;InitDevices.c: 54: ADRESH = 0;
-"54
+[; ;InitDevices.c: 51: ADRESH = 0;
+"51
 [e = _ADRESH -> -> 0 `i `uc ]
-[; ;InitDevices.c: 55: ADIE = 0;
-"55
+[; ;InitDevices.c: 52: ADIE = 0;
+"52
 [e = _ADIE -> -> 0 `i `b ]
-[; ;InitDevices.c: 56: PEIE = 1;
-"56
+[; ;InitDevices.c: 53: PEIE = 1;
+"53
 [e = _PEIE -> -> 1 `i `b ]
-[; ;InitDevices.c: 57: ADIF = 0;
-"57
+[; ;InitDevices.c: 54: ADIF = 0;
+"54
 [e = _ADIF -> -> 0 `i `b ]
-[; ;InitDevices.c: 58: GO_DONE = 1;
-"58
+[; ;InitDevices.c: 55: GO_DONE = 1;
+"55
 [e = _GO_DONE -> -> 1 `i `b ]
-[; ;InitDevices.c: 59: ADON = 1;
-"59
+[; ;InitDevices.c: 56: ADON = 1;
+"56
 [e = _ADON -> -> 1 `i `b ]
-[; ;InitDevices.c: 60: }
-"60
+[; ;InitDevices.c: 57: }
+"57
 [e :UE 140 ]
 }
-"70
+"67
 [v _IIC_init `(v  1 ef ]
 {
-[; ;InitDevices.c: 69: void IIC_init(void)
-[; ;InitDevices.c: 70: {
+[; ;InitDevices.c: 66: void IIC_init(void)
+[; ;InitDevices.c: 67: {
 [e :U _IIC_init ]
 [f ]
-[; ;InitDevices.c: 71: TRISC3=1;
-"71
+[; ;InitDevices.c: 68: TRISC3=1;
+"68
 [e = _TRISC3 -> -> 1 `i `b ]
-[; ;InitDevices.c: 72: TRISC4=1;
-"72
+[; ;InitDevices.c: 69: TRISC4=1;
+"69
 [e = _TRISC4 -> -> 1 `i `b ]
-[; ;InitDevices.c: 73: SSPSTAT=0x80;
-"73
+[; ;InitDevices.c: 70: SSPSTAT=0x80;
+"70
 [e = _SSPSTAT -> -> 128 `i `uc ]
-[; ;InitDevices.c: 74: SSPCON=0x28;
-"74
+[; ;InitDevices.c: 71: SSPCON=0x28;
+"71
 [e = _SSPCON -> -> 40 `i `uc ]
-[; ;InitDevices.c: 75: SSPCON2=0;
-"75
+[; ;InitDevices.c: 72: SSPCON2=0;
+"72
 [e = _SSPCON2 -> -> 0 `i `uc ]
-[; ;InitDevices.c: 79: SSPADD=0x13;
-"79
+[; ;InitDevices.c: 76: SSPADD=0x13;
+"76
 [e = _SSPADD -> -> 19 `i `uc ]
-[; ;InitDevices.c: 80: }
-"80
+[; ;InitDevices.c: 77: }
+"77
 [e :UE 141 ]
 }
-"84
+"81
 [v _InitTimer0 `(v  1 ef ]
 {
-[; ;InitDevices.c: 83: void InitTimer0(void)
-[; ;InitDevices.c: 84: {
+[; ;InitDevices.c: 80: void InitTimer0(void)
+[; ;InitDevices.c: 81: {
 [e :U _InitTimer0 ]
 [f ]
-[; ;InitDevices.c: 85: OPTION_REG = 0X86;
-"85
+[; ;InitDevices.c: 82: OPTION_REG = 0X86;
+"82
 [e = _OPTION_REG -> -> 134 `i `uc ]
-[; ;InitDevices.c: 86: TMR0 = 0XFF;
-"86
+[; ;InitDevices.c: 83: TMR0 = 0XFF;
+"83
 [e = _TMR0 -> -> 255 `i `uc ]
-[; ;InitDevices.c: 87: T0IE=0;
-"87
+[; ;InitDevices.c: 84: T0IE=0;
+"84
 [e = _T0IE -> -> 0 `i `b ]
-[; ;InitDevices.c: 88: }
-"88
+[; ;InitDevices.c: 85: }
+"85
 [e :UE 142 ]
 }
-"90
+"87
 [v _InitTimer1 `(v  1 ef ]
 {
-[; ;InitDevices.c: 89: void InitTimer1(void)
-[; ;InitDevices.c: 90: {
+[; ;InitDevices.c: 86: void InitTimer1(void)
+[; ;InitDevices.c: 87: {
 [e :U _InitTimer1 ]
 [f ]
-[; ;InitDevices.c: 91: T1CON=0x00;
-"91
+[; ;InitDevices.c: 88: T1CON=0x00;
+"88
 [e = _T1CON -> -> 0 `i `uc ]
-[; ;InitDevices.c: 92: TMR1CS = 0;
-"92
+[; ;InitDevices.c: 89: TMR1CS = 0;
+"89
 [e = _TMR1CS -> -> 0 `i `b ]
-[; ;InitDevices.c: 93: T1CONbits.T1CKPS0=1;
-"93
+[; ;InitDevices.c: 90: T1CONbits.T1CKPS0=1;
+"90
 [e = . . _T1CONbits 1 3 -> -> 1 `i `uc ]
-[; ;InitDevices.c: 94: T1CONbits.T1CKPS1=0;
-"94
+[; ;InitDevices.c: 91: T1CONbits.T1CKPS1=0;
+"91
 [e = . . _T1CONbits 1 4 -> -> 0 `i `uc ]
-[; ;InitDevices.c: 96: TMR1=15536;
-"96
+[; ;InitDevices.c: 93: TMR1=15536;
+"93
 [e = _TMR1 -> -> 15536 `i `ui ]
-[; ;InitDevices.c: 97: TMR1IE=1;
-"97
+[; ;InitDevices.c: 94: TMR1IE=1;
+"94
 [e = _TMR1IE -> -> 1 `i `b ]
-[; ;InitDevices.c: 98: TMR1IF = 0;
-"98
+[; ;InitDevices.c: 95: TMR1IF = 0;
+"95
 [e = _TMR1IF -> -> 0 `i `b ]
-[; ;InitDevices.c: 99: TMR1ON=0;
-"99
+[; ;InitDevices.c: 96: TMR1ON=0;
+"96
 [e = _TMR1ON -> -> 0 `i `b ]
-[; ;InitDevices.c: 100: }
-"100
+[; ;InitDevices.c: 97: }
+"97
 [e :UE 143 ]
 }
-"103
+"100
 [v _InitTimer2 `(v  1 ef ]
 {
-[; ;InitDevices.c: 102: void InitTimer2(void)
-[; ;InitDevices.c: 103: {
+[; ;InitDevices.c: 99: void InitTimer2(void)
+[; ;InitDevices.c: 100: {
 [e :U _InitTimer2 ]
 [f ]
-[; ;InitDevices.c: 104: T2CON = 0X00;
-"104
+[; ;InitDevices.c: 101: T2CON = 0X00;
+"101
 [e = _T2CON -> -> 0 `i `uc ]
-[; ;InitDevices.c: 105: TMR2=0;
-"105
+[; ;InitDevices.c: 102: TMR2=0;
+"102
 [e = _TMR2 -> -> 0 `i `uc ]
-[; ;InitDevices.c: 106: PR2=199;
-"106
+[; ;InitDevices.c: 103: PR2=199;
+"103
 [e = _PR2 -> -> 199 `i `uc ]
-[; ;InitDevices.c: 107: TMR2IE=1;
-"107
+[; ;InitDevices.c: 104: TMR2IE=1;
+"104
 [e = _TMR2IE -> -> 1 `i `b ]
-[; ;InitDevices.c: 108: TMR2IF = 0;
-"108
+[; ;InitDevices.c: 105: TMR2IF = 0;
+"105
 [e = _TMR2IF -> -> 0 `i `b ]
-[; ;InitDevices.c: 109: TMR2ON = 0;
-"109
+[; ;InitDevices.c: 106: TMR2ON = 0;
+"106
 [e = _TMR2ON -> -> 0 `i `b ]
-[; ;InitDevices.c: 110: }
-"110
+[; ;InitDevices.c: 107: }
+"107
 [e :UE 144 ]
 }
-"113
+"110
 [v _InitCn `(v  1 ef ]
 {
-[; ;InitDevices.c: 112: void InitCn(void)
-[; ;InitDevices.c: 113: {
+[; ;InitDevices.c: 109: void InitCn(void)
+[; ;InitDevices.c: 110: {
 [e :U _InitCn ]
 [f ]
-[; ;InitDevices.c: 114: IOCB=0X10;
-"114
+[; ;InitDevices.c: 111: IOCB=0X10;
+"111
 [e = _IOCB -> -> 16 `i `uc ]
-[; ;InitDevices.c: 115: RBIE=1;
-"115
+[; ;InitDevices.c: 112: RBIE=1;
+"112
 [e = _RBIE -> -> 1 `i `b ]
-[; ;InitDevices.c: 116: RBIF=0;
-"116
+[; ;InitDevices.c: 113: RBIF=0;
+"113
 [e = _RBIF -> -> 0 `i `b ]
-[; ;InitDevices.c: 117: }
-"117
+[; ;InitDevices.c: 114: }
+"114
 [e :UE 145 ]
 }
-"120
+"117
 [v _InitDevices `(v  1 ef ]
 {
-[; ;InitDevices.c: 119: void InitDevices(void)
-[; ;InitDevices.c: 120: {
+[; ;InitDevices.c: 116: void InitDevices(void)
+[; ;InitDevices.c: 117: {
 [e :U _InitDevices ]
 [f ]
-[; ;InitDevices.c: 121: systemOSC();
-"121
+[; ;InitDevices.c: 118: systemOSC();
+"118
 [e ( _systemOSC ..  ]
-[; ;InitDevices.c: 122: PortInit();
-"122
+[; ;InitDevices.c: 119: PortInit();
+"119
 [e ( _PortInit ..  ]
-[; ;InitDevices.c: 124: InitTimer1();
-"124
+[; ;InitDevices.c: 120: InitTimer0();
+"120
+[e ( _InitTimer0 ..  ]
+[; ;InitDevices.c: 121: InitTimer1();
+"121
 [e ( _InitTimer1 ..  ]
-[; ;InitDevices.c: 125: IIC_init();
-"125
+[; ;InitDevices.c: 122: IIC_init();
+"122
 [e ( _IIC_init ..  ]
-[; ;InitDevices.c: 127: InitTimer2();
-"127
+[; ;InitDevices.c: 123: InitialiseADC();
+"123
+[e ( _InitialiseADC ..  ]
+[; ;InitDevices.c: 124: InitTimer2();
+"124
 [e ( _InitTimer2 ..  ]
-[; ;InitDevices.c: 128: InitCn();
-"128
+[; ;InitDevices.c: 125: InitCn();
+"125
 [e ( _InitCn ..  ]
-[; ;InitDevices.c: 129: PEIE = 1;
-"129
+[; ;InitDevices.c: 126: PEIE = 1;
+"126
 [e = _PEIE -> -> 1 `i `b ]
-[; ;InitDevices.c: 130: TMR1ON=1;
-"130
+[; ;InitDevices.c: 127: TMR1ON=1;
+"127
 [e = _TMR1ON -> -> 1 `i `b ]
-[; ;InitDevices.c: 131: GIE=1;
-"131
+[; ;InitDevices.c: 128: GIE=1;
+"128
 [e = _GIE -> -> 1 `i `b ]
-[; ;InitDevices.c: 133: }
-"133
+[; ;InitDevices.c: 130: WDTCON = 0x16;
+"130
+[e = _WDTCON -> -> 22 `i `uc ]
+[; ;InitDevices.c: 132: }
+"132
 [e :UE 146 ]
 }

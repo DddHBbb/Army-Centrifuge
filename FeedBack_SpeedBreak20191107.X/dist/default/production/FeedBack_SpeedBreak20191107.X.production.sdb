@@ -3910,25 +3910,25 @@
 [v _com `I(v  1 e 0 0 ]
 "50
 [v _TMR1_int `(v  1 e 0 0 ]
-"136
+"138
 [v _TMR2_int `(v  1 e 0 0 ]
-"143
+"145
 [v _RBCN_int `(v  1 e 0 0 ]
 "28 main.c
 [v _main `(v  1 e 0 0 ]
-"152
+"151
 [v _The_Close `(v  1 e 0 0 ]
 "6 work.c
 [v _MotorStart `(v  1 e 0 0 ]
 "40
 [v _MotorClose `(v  1 e 0 0 ]
-"73
+"84
 [v _Motor_adjusting_speed `(v  1 e 0 0 ]
-"96
+"107
 [v _Motor_working_time `(v  1 e 0 0 ]
-"108
+"119
 [v _SystemCheck `(uc  1 e 1 0 ]
-"114
+"125
 [v _ErrorControl `(v  1 e 0 0 ]
 "118 /hitech/products/compilers/pic/pro/9.82/dist/linux/include/pic16f886.h
 [v _INDF `VEuc  1 e 1 @0 ]
@@ -4969,22 +4969,22 @@
 {
 "29
 [v main@i `uc  1 a 1 9 ]
-"150
+"149
 } 0
 "40 work.c
 [v _MotorClose `(v  1 e 0 0 ]
 {
-"71
+"82
 } 0
-"73
+"84
 [v _Motor_adjusting_speed `(v  1 e 0 0 ]
 {
-"94
+"105
 } 0
-"152 main.c
+"151 main.c
 [v _The_Close `(v  1 e 0 0 ]
 {
-"168
+"167
 } 0
 "5 IIC.c
 [v _write_IIC `(v  1 e 0 0 ]
@@ -5089,17 +5089,17 @@
 {
 "51
 [v TMR1_int@t `uc  1 a 1 1 ]
-"134
-} 0
 "136
+} 0
+"138
 [v _TMR2_int `(v  1 e 0 0 ]
 {
-"141
-} 0
 "143
+} 0
+"145
 [v _RBCN_int `(v  1 e 0 0 ]
 {
-"144
+"146
 [v RBCN_int@Sameple `uc  1 a 1 1 ]
-"161
+"163
 } 0

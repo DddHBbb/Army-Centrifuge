@@ -1586,33 +1586,44 @@ delaynms(100);
 void MotorClose(void)
 {
 write_IIC(0x08 ,0xfc );
-delaynms(100);
+delaynms(10);
+asm("clrwdt");
 write_IIC(0x07 ,0x9E );
-delaynms(100);
+delaynms(10);
+asm("clrwdt");
 
 
 write_IIC(0x06 ,0x66 );
-delaynms(100);
+delaynms(10);
+asm("clrwdt");
 write_IIC(0x05,0x70 );
-delaynms(100);
+delaynms(10);
+asm("clrwdt");
 
 
 write_IIC(0x03,0xD6 );
-delaynms(100);
+delaynms(10);
+asm("clrwdt");
 
 
 write_IIC(0x02,0x6B );
-delaynms(100);
+delaynms(10);
+asm("clrwdt");
 write_IIC(0x01,0xA3 );
-delaynms(100);
+delaynms(10);
+asm("clrwdt");
 write_IIC(0x00,0x64 );
-delaynms(100);
+delaynms(10);
+asm("clrwdt");
 write_IIC(0x00,0x32 );
-delaynms(100);
+delaynms(10);
+asm("clrwdt");
 write_IIC(0x00,0x14 );
-delaynms(100);
+delaynms(10);
+asm("clrwdt");
 write_IIC(0x00,0x00 );
-delaynms(100);
+delaynms(10);
+asm("clrwdt");
 TMR1ON=1;
 GIE=1;
 }

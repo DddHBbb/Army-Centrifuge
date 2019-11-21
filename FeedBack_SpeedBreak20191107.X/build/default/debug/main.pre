@@ -1533,7 +1533,7 @@ bit RELAY_AC=0;
 unsigned int get1_ad(void);
 unsigned int ReadADC(unsigned char ADC_Channel);
 
-# 4 "main.c"
+# 7 "main.c"
 void The_Close(void);
 unsigned char Start_Flag=0;
 unsigned char Initial_Flag=0;
@@ -1553,21 +1553,45 @@ unsigned char Count_Flag=0;
 unsigned char Work_Flag=0;
 unsigned char Start_KeyRun_Flag=0;
 
-
-
+unsigned int ADC_Val;
 void main(void)
 {
 unsigned char i;
 InitDevices();
-PORTBbits.RB2 = 1;asm ("NOP");
-PORTBbits.RB3 = 0;asm ("NOP");
+write_IIC(0x00,0x00 );
 while(1)
 {
+
+if(PORTAbits.RA5 == 1) {PORTBbits.RB2 = 1;asm ("NOP");}
+else {PORTBbits.RB2 = 0;asm ("NOP");}
 
 if((Count_Flag == 0) && (Work_Flag == 1)) {PORTBbits.RB0 = 1;asm ("NOP");}
 else if(Key_Run == 0 ) {PORTBbits.RB0 = 0;asm ("NOP");}
 
-# 61
+for(i=0;i<70;i++)
+{
+ADC_Val += ReadADC(3);
+}
+ADC_Val /=70;
+if(PORTAbits.RA5 == 1)
+{
+if(ADC_Val < 595) {PORTBbits.RB3 = 1;asm ("NOP");}
+else {PORTBbits.RB3 = 0;asm ("NOP");}
+}
+else
+{
+if(ADC_Val< 510)
+{
+PORTBbits.RB3 = 1;asm ("NOP");
+delaynms(50);
+PORTBbits.RB3 = 0;asm ("NOP");
+delaynms(50);
+}
+else if((ADC_Val >= 510) && (ADC_Val <595)) {PORTBbits.RB3 = 1;asm ("NOP");}
+else if(ADC_Val >= 595) {PORTBbits.RB3 = 0;asm ("NOP");}
+}
+
+
 if((Onekey_Flag == 1) &&(Work_Flag == 0))
 {
 PORTCbits.RC0= 1;asm ("NOP");
@@ -1591,6 +1615,8 @@ if((PORTAbits.RA1 == 0) && (Not_two == 1))
 {
 if(Key_Run == 1)
 {
+WDTCONbits.SWDTEN = 1;
+asm("clrwdt");
 while(Initial_Flag == 0)
 {
 Work_Flag = 1;
@@ -1605,6 +1631,7 @@ break;
 }
 if((Start_Flag == 0)&&(kai == 1))
 {
+asm("clrwdt");
 Motor_adjusting_speed();
 }
 else if(Stop_Flag == 1)
@@ -1614,9 +1641,10 @@ if(Once == 0)
 {
 MotorClose();
 Once = 1;
+Forbid_input = 1;
 }
 Count_Flag=0;
-if(Open_Cover_times == 2700)
+if(Open_Cover_times >= 2700)
 {
 The_Close();
 }
@@ -1624,24 +1652,30 @@ The_Close();
 }
 else if(Key_Run == 2)
 {
-Forbid_input = 1;
+asm("clrwdt");
 Open_Cover_Flag = 1;
+Forbid_input = 1;
 if(Once == 0)
 {
 MotorClose();
 Once = 1;
 }
 Count_Flag=0;
-if(Open_Cover_times == 2700)
+if(Open_Cover_times >= 2700)
 {
 The_Close();
 }
 }
 }
-
-# 139
+else if (PORTAbits.RA1 != 0) write_IIC(0x00,0x00 );
+else if((PORTAbits.RA1 != 0) && (Initial_Flag == 1))
+{
+while(1)
+{
+write_IIC(0x00,0x00 ); ;
 }
-
+}
+}
 }
 void The_Close(void)
 {
@@ -1658,5 +1692,6 @@ delaynms(10);
 PORTAbits.RA2 = 0;asm ("NOP");
 Key_Run = 0;
 Once = 0;
-Forbid_input = 0;
+Forbid_input=0;
+WDTCONbits.SWDTEN = 0;
 }

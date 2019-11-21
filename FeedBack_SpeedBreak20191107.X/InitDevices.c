@@ -127,6 +127,6 @@ void InitDevices(void)
     TMR1ON=1; 
     GIE=1; 
 	//WDTCON = 0x17;//2048ms
-    WDTCON = 0x12;//512ms  
+    WDTCON = 0x16;//512ms  
 	
 }

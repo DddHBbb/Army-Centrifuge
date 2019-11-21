@@ -83,6 +83,7 @@ void  TMR1_int(void)                  //50ms
 		if((PORTBbits.RB1 == 0) && (Key_Up == 0))
 		{
 			Key_Run_times++;
+            CLRWDT();
 			if(Key_Run_times == 40) 
 			{
 				Key_Run++;
@@ -98,6 +99,7 @@ void  TMR1_int(void)                  //50ms
         if((PORTCbits.RC1 == 0) && (Onekey_Key_Up == 0))
         {
             Onekey_times++;
+            CLRWDT();
             if(Onekey_times == 40)
             {
                 Onekey_Flag++;

@@ -39,33 +39,44 @@ void MotorStart(void)      //空载10S加速到12000转
 void MotorClose(void)     //带有刹车，电机立即停.止，无惯性
 {
     write_IIC(0x08 ,0xfc );    //2.2V  空载11000转     2300
-	delaynms(100);
+	delaynms(10);
+     CLRWDT();
     write_IIC(0x07 ,0x9E );    //2.2V  空载11000转    1950
-    delaynms(100);
+    delaynms(10);
+     CLRWDT();
 	//    write_IIC(0x07 ,0x09 );    //2.2V  空载11000转    1801
 	//    delaynms(500);
     write_IIC(0x06 ,0x66 );    //2V  空载9000转      1638
-    delaynms(100); 
+    delaynms(10); 
+     CLRWDT();
     write_IIC(0x05,0x70 );    //1.7V  空载6000转    1392
-    delaynms(100);
+    delaynms(10);
+     CLRWDT();
 	//    write_IIC(0x04,0xCC );    //    1288
 	//    delaynms(500);
     write_IIC(0x03,0xD6 );   //1.2V  空载2800转    982
-    delaynms(100);
+    delaynms(10);
+     CLRWDT();
 	//    write_IIC(0x03,0x33 );    //1V  空载1200转     819
 	//    delaynms(100);
     write_IIC(0x02,0x6B );    //1V  空载1200转      619
-    delaynms(100);  
+    delaynms(10);
+     CLRWDT();
     write_IIC(0x01,0xA3 );    //1V  空载1200转      419
-    delaynms(100);
+    delaynms(10);
+     CLRWDT();
     write_IIC(0x00,0x64 );    //1V  空载1200转      100
-    delaynms(100);
+    delaynms(10);
+     CLRWDT();
     write_IIC(0x00,0x32 );    //1V  空载1200转      50
-    delaynms(100);
+    delaynms(10);
+     CLRWDT();
     write_IIC(0x00,0x14 );    //1V  空载1200转      20
-    delaynms(100);
+    delaynms(10);
+     CLRWDT();
     write_IIC(0x00,0x00 );    //1V  空载1200转
-    delaynms(100);
+    delaynms(10);
+     CLRWDT();
     TMR1ON=1; 
     GIE=1; 
 }

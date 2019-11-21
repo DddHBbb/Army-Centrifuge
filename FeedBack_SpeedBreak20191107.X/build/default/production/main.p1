@@ -2624,60 +2624,69 @@ Version 3.2 HI-TECH Software Intermediate Code
 "44
 }
 [; ;main.c: 44: }
-[; ;main.c: 45: ADC_Val/=70;
+[; ;main.c: 45: ADC_Val /=70;
 "45
 [e =/ _ADC_Val -> -> 70 `uc `ui ]
-[; ;main.c: 46: if((ADC_Val< 510))
+[; ;main.c: 46: if(PORTAbits.RA5 == 1)
 "46
-[e $ ! < _ADC_Val -> -> 510 `i `ui 149  ]
+[e $ ! == -> . . _PORTAbits 0 5 `i -> 1 `i 149  ]
 [; ;main.c: 47: {
 "47
 {
-[; ;main.c: 48: if(PORTAbits.RA5 == 0)
+[; ;main.c: 48: if(ADC_Val < 595) {PORTBbits.RB3 = 1;asm ("NOP");}
 "48
-[e $ ! == -> . . _PORTAbits 0 5 `i -> 0 `i 150  ]
-[; ;main.c: 49: {
-"49
+[e $ ! < _ADC_Val -> -> 595 `i `ui 150  ]
 {
-[; ;main.c: 50: PORTBbits.RB3 = ~PORTBbits.RB3;
-"50
-[e = . . _PORTBbits 0 3 -> ~ -> . . _PORTBbits 0 3 `i `uc ]
-[; ;main.c: 51: delaynms(50);
-"51
-[e ( _delaynms (1 -> -> 50 `i `ui ]
-"52
+[e = . . _PORTBbits 0 3 -> -> 1 `i `uc ]
+[; NOP ;#
 }
-[e :U 150 ]
-"53
-}
-[; ;main.c: 52: }
-[; ;main.c: 53: }
 [e $U 151  ]
-"54
-[e :U 149 ]
-[; ;main.c: 54: else if(ADC_Val > 595)
-[e $ ! > _ADC_Val -> -> 595 `i `ui 152  ]
-[; ;main.c: 55: {
-"55
+"49
+[e :U 150 ]
+[; ;main.c: 49: else {PORTBbits.RB3 = 0;asm ("NOP");}
 {
-[; ;main.c: 56: PORTBbits.RB3 = 0;asm ("NOP");
-"56
 [e = . . _PORTBbits 0 3 -> -> 0 `i `uc ]
 [; NOP ;#
-"57
 }
-[; ;main.c: 57: }
-[e $U 153  ]
-"58
-[e :U 152 ]
-[; ;main.c: 58: else if((ADC_Val < 580) && (ADC_Val> 540))
-[e $ ! && < _ADC_Val -> -> 580 `i `ui > _ADC_Val -> -> 540 `i `ui 154  ]
-[; ;main.c: 59: {
-"59
+[e :U 151 ]
+"50
+}
+[; ;main.c: 50: }
+[e $U 152  ]
+"51
+[e :U 149 ]
+[; ;main.c: 51: else
+[; ;main.c: 52: {
+"52
 {
-[; ;main.c: 60: if(PORTAbits.RA5 == 1) {PORTBbits.RB3 = 1;asm ("NOP");}
+[; ;main.c: 53: if(ADC_Val< 510)
+"53
+[e $ ! < _ADC_Val -> -> 510 `i `ui 153  ]
+[; ;main.c: 54: {
+"54
+{
+[; ;main.c: 55: PORTBbits.RB3 = 1;asm ("NOP");
+"55
+[e = . . _PORTBbits 0 3 -> -> 1 `i `uc ]
+[; NOP ;#
+[; ;main.c: 56: delaynms(50);
+"56
+[e ( _delaynms (1 -> -> 50 `i `ui ]
+[; ;main.c: 57: PORTBbits.RB3 = 0;asm ("NOP");
+"57
+[e = . . _PORTBbits 0 3 -> -> 0 `i `uc ]
+[; NOP ;#
+[; ;main.c: 58: delaynms(50);
+"58
+[e ( _delaynms (1 -> -> 50 `i `ui ]
+"59
+}
+[; ;main.c: 59: }
+[e $U 154  ]
 "60
-[e $ ! == -> . . _PORTAbits 0 5 `i -> 1 `i 155  ]
+[e :U 153 ]
+[; ;main.c: 60: else if((ADC_Val >= 510) && (ADC_Val <595)) {PORTBbits.RB3 = 1;asm ("NOP");}
+[e $ ! && >= _ADC_Val -> -> 510 `i `ui < _ADC_Val -> -> 595 `i `ui 155  ]
 {
 [e = . . _PORTBbits 0 3 -> -> 1 `i `uc ]
 [; NOP ;#
@@ -2685,21 +2694,22 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 156  ]
 "61
 [e :U 155 ]
-[; ;main.c: 61: else {PORTBbits.RB3 = 0;asm ("NOP");}
+[; ;main.c: 61: else if(ADC_Val >= 595) {PORTBbits.RB3 = 0;asm ("NOP");}
+[e $ ! >= _ADC_Val -> -> 595 `i `ui 157  ]
 {
 [e = . . _PORTBbits 0 3 -> -> 0 `i `uc ]
 [; NOP ;#
 }
-[e :U 156 ]
+[e :U 157 ]
 "62
-}
+[e :U 156 ]
 [e :U 154 ]
-"65
-[e :U 153 ]
-[e :U 151 ]
+}
+[e :U 152 ]
 [; ;main.c: 62: }
 [; ;main.c: 65: if((Onekey_Flag == 1) &&(Work_Flag == 0))
-[e $ ! && == -> _Onekey_Flag `i -> 1 `i == -> _Work_Flag `i -> 0 `i 157  ]
+"65
+[e $ ! && == -> _Onekey_Flag `i -> 1 `i == -> _Work_Flag `i -> 0 `i 158  ]
 [; ;main.c: 66: {
 "66
 {
@@ -2720,11 +2730,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _Not_two -> -> 1 `i `uc ]
 "71
 }
-[e :U 157 ]
+[e :U 158 ]
 [; ;main.c: 71: }
 [; ;main.c: 72: if((Onekey_Flag == 2) && (Work_Flag == 0))
 "72
-[e $ ! && == -> _Onekey_Flag `i -> 2 `i == -> _Work_Flag `i -> 0 `i 158  ]
+[e $ ! && == -> _Onekey_Flag `i -> 2 `i == -> _Work_Flag `i -> 0 `i 159  ]
 [; ;main.c: 73: {
 "73
 {
@@ -2759,84 +2769,87 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _Onekey_Flag -> -> 0 `i `uc ]
 "82
 }
-[e :U 158 ]
+[e :U 159 ]
 [; ;main.c: 82: }
 [; ;main.c: 84: if((PORTAbits.RA1 == 0) && (Not_two == 1))
 "84
-[e $ ! && == -> . . _PORTAbits 0 1 `i -> 0 `i == -> _Not_two `i -> 1 `i 159  ]
+[e $ ! && == -> . . _PORTAbits 0 1 `i -> 0 `i == -> _Not_two `i -> 1 `i 160  ]
 [; ;main.c: 85: {
 "85
 {
-[; ;main.c: 87: if(Key_Run == 1)
+[; ;main.c: 86: if(Key_Run == 1)
+"86
+[e $ ! == -> _Key_Run `i -> 1 `i 161  ]
+[; ;main.c: 87: {
 "87
-[e $ ! == -> _Key_Run `i -> 1 `i 160  ]
-[; ;main.c: 88: {
+{
+[; ;main.c: 88: WDTCONbits.SWDTEN = 1;
 "88
-{
-[; ;main.c: 89: WDTCONbits.SWDTEN = 1;
-"89
 [e = . . _WDTCONbits 0 0 -> -> 1 `i `uc ]
-[; ;main.c: 90: asm("clrwdt");
-"90
+[; ;main.c: 89: asm("clrwdt");
+"89
 [; clrwdt ;#
-[; ;main.c: 91: while(Initial_Flag == 0)
-"91
-[e $U 161  ]
-[e :U 162 ]
-[; ;main.c: 92: {
-"92
-{
-[; ;main.c: 93: Work_Flag = 1;
-"93
-[e = _Work_Flag -> -> 1 `i `uc ]
-[; ;main.c: 94: Count_Flag = 1;
-"94
-[e = _Count_Flag -> -> 1 `i `uc ]
-[; ;main.c: 95: write_IIC(0x03,0x33 );
-"95
-[e ( _write_IIC (2 , -> -> 3 `i `uc -> -> 51 `i `uc ]
-[; ;main.c: 96: delaynms(1);
-"96
-[e ( _delaynms (1 -> -> 1 `i `ui ]
-[; ;main.c: 97: write_IIC(0x04,0x4c );
-"97
-[e ( _write_IIC (2 , -> -> 4 `i `uc -> -> 76 `i `uc ]
-[; ;main.c: 98: delaynms(1);
-"98
-[e ( _delaynms (1 -> -> 1 `i `ui ]
-[; ;main.c: 99: Initial_Flag = 1;
-"99
-[e = _Initial_Flag -> -> 1 `i `uc ]
-[; ;main.c: 100: kai = 1;
-"100
-[e = _kai -> -> 1 `i `uc ]
-[; ;main.c: 101: break;
-"101
-[e $U 163  ]
-"102
-}
-[e :U 161 ]
-"91
-[e $ == -> _Initial_Flag `i -> 0 `i 162  ]
+[; ;main.c: 90: while(Initial_Flag == 0)
+"90
+[e $U 162  ]
 [e :U 163 ]
-[; ;main.c: 102: }
-[; ;main.c: 103: if((Start_Flag == 0)&&(kai == 1))
-"103
-[e $ ! && == -> _Start_Flag `i -> 0 `i == -> _kai `i -> 1 `i 164  ]
-[; ;main.c: 104: {
-"104
+[; ;main.c: 91: {
+"91
 {
+[; ;main.c: 92: Work_Flag = 1;
+"92
+[e = _Work_Flag -> -> 1 `i `uc ]
+[; ;main.c: 93: Count_Flag = 1;
+"93
+[e = _Count_Flag -> -> 1 `i `uc ]
+[; ;main.c: 94: write_IIC(0x03,0x33 );
+"94
+[e ( _write_IIC (2 , -> -> 3 `i `uc -> -> 51 `i `uc ]
+[; ;main.c: 95: delaynms(1);
+"95
+[e ( _delaynms (1 -> -> 1 `i `ui ]
+[; ;main.c: 96: write_IIC(0x04,0x4c );
+"96
+[e ( _write_IIC (2 , -> -> 4 `i `uc -> -> 76 `i `uc ]
+[; ;main.c: 97: delaynms(1);
+"97
+[e ( _delaynms (1 -> -> 1 `i `ui ]
+[; ;main.c: 98: Initial_Flag = 1;
+"98
+[e = _Initial_Flag -> -> 1 `i `uc ]
+[; ;main.c: 99: kai = 1;
+"99
+[e = _kai -> -> 1 `i `uc ]
+[; ;main.c: 100: break;
+"100
+[e $U 164  ]
+"101
+}
+[e :U 162 ]
+"90
+[e $ == -> _Initial_Flag `i -> 0 `i 163  ]
+[e :U 164 ]
+[; ;main.c: 101: }
+[; ;main.c: 102: if((Start_Flag == 0)&&(kai == 1))
+"102
+[e $ ! && == -> _Start_Flag `i -> 0 `i == -> _kai `i -> 1 `i 165  ]
+[; ;main.c: 103: {
+"103
+{
+[; ;main.c: 104: asm("clrwdt");
+"104
+[; clrwdt ;#
 [; ;main.c: 105: Motor_adjusting_speed();
 "105
 [e ( _Motor_adjusting_speed ..  ]
 "106
 }
 [; ;main.c: 106: }
-[e $U 165  ]
+[e $U 166  ]
 "107
-[e :U 164 ]
+[e :U 165 ]
 [; ;main.c: 107: else if(Stop_Flag == 1)
-[e $ ! == -> _Stop_Flag `i -> 1 `i 166  ]
+[e $ ! == -> _Stop_Flag `i -> 1 `i 167  ]
 [; ;main.c: 108: {
 "108
 {
@@ -2845,7 +2858,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _Open_Cover_Flag -> -> 1 `i `uc ]
 [; ;main.c: 110: if(Once == 0)
 "110
-[e $ ! == -> _Once `i -> 0 `i 167  ]
+[e $ ! == -> _Once `i -> 0 `i 168  ]
 [; ;main.c: 111: {
 "111
 {
@@ -2860,191 +2873,191 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _Forbid_input -> -> 1 `i `uc ]
 "115
 }
-[e :U 167 ]
+[e :U 168 ]
 [; ;main.c: 115: }
 [; ;main.c: 116: Count_Flag=0;
 "116
 [e = _Count_Flag -> -> 0 `i `uc ]
 [; ;main.c: 117: if(Open_Cover_times >= 2700)
 "117
-[e $ ! >= _Open_Cover_times -> -> 2700 `i `ui 168  ]
+[e $ ! >= _Open_Cover_times -> -> 2700 `i `ui 169  ]
 [; ;main.c: 118: {
 "118
 {
-[; ;main.c: 120: The_Close();
-"120
+[; ;main.c: 119: The_Close();
+"119
 [e ( _The_Close ..  ]
+"120
+}
+[e :U 169 ]
 "121
 }
-[e :U 168 ]
+[e :U 167 ]
 "122
-}
 [e :U 166 ]
-"123
-[e :U 165 ]
 }
+[; ;main.c: 120: }
 [; ;main.c: 121: }
 [; ;main.c: 122: }
-[; ;main.c: 123: }
-[e $U 169  ]
+[e $U 170  ]
+"123
+[e :U 161 ]
+[; ;main.c: 123: else if(Key_Run == 2)
+[e $ ! == -> _Key_Run `i -> 2 `i 171  ]
+[; ;main.c: 124: {
 "124
-[e :U 160 ]
-[; ;main.c: 124: else if(Key_Run == 2)
-[e $ ! == -> _Key_Run `i -> 2 `i 170  ]
-[; ;main.c: 125: {
+{
+[; ;main.c: 125: asm("clrwdt");
 "125
-{
-[; ;main.c: 126: asm("clrwdt");
-"126
 [; clrwdt ;#
-[; ;main.c: 127: Open_Cover_Flag = 1;
-"127
+[; ;main.c: 126: Open_Cover_Flag = 1;
+"126
 [e = _Open_Cover_Flag -> -> 1 `i `uc ]
-[; ;main.c: 128: Forbid_input = 1;
-"128
+[; ;main.c: 127: Forbid_input = 1;
+"127
 [e = _Forbid_input -> -> 1 `i `uc ]
-[; ;main.c: 129: if(Once == 0)
+[; ;main.c: 128: if(Once == 0)
+"128
+[e $ ! == -> _Once `i -> 0 `i 172  ]
+[; ;main.c: 129: {
 "129
-[e $ ! == -> _Once `i -> 0 `i 171  ]
-[; ;main.c: 130: {
+{
+[; ;main.c: 130: MotorClose();
 "130
-{
-[; ;main.c: 131: MotorClose();
-"131
 [e ( _MotorClose ..  ]
-[; ;main.c: 132: Once = 1;
-"132
+[; ;main.c: 131: Once = 1;
+"131
 [e = _Once -> -> 1 `i `uc ]
-"133
-}
-[e :U 171 ]
-[; ;main.c: 133: }
-[; ;main.c: 134: Count_Flag=0;
-"134
-[e = _Count_Flag -> -> 0 `i `uc ]
-[; ;main.c: 135: if(Open_Cover_times >= 2700)
-"135
-[e $ ! >= _Open_Cover_times -> -> 2700 `i `ui 172  ]
-[; ;main.c: 136: {
-"136
-{
-[; ;main.c: 137: The_Close();
-"137
-[e ( _The_Close ..  ]
-"138
+"132
 }
 [e :U 172 ]
+[; ;main.c: 132: }
+[; ;main.c: 133: Count_Flag=0;
+"133
+[e = _Count_Flag -> -> 0 `i `uc ]
+[; ;main.c: 134: if(Open_Cover_times >= 2700)
+"134
+[e $ ! >= _Open_Cover_times -> -> 2700 `i `ui 173  ]
+[; ;main.c: 135: {
+"135
+{
+[; ;main.c: 136: The_Close();
+"136
+[e ( _The_Close ..  ]
+"137
+}
+[e :U 173 ]
+"138
+}
+[e :U 171 ]
 "139
-}
 [e :U 170 ]
-"140
-[e :U 169 ]
 }
+[; ;main.c: 137: }
 [; ;main.c: 138: }
 [; ;main.c: 139: }
-[; ;main.c: 140: }
-[e $U 173  ]
+[e $U 174  ]
+"140
+[e :U 160 ]
+[; ;main.c: 140: else if (PORTAbits.RA1 != 0) write_IIC(0x00,0x00 );
+[e $ ! != -> . . _PORTAbits 0 1 `i -> 0 `i 175  ]
+[e ( _write_IIC (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+[e $U 176  ]
 "141
-[e :U 159 ]
-[; ;main.c: 141: else if (PORTAbits.RA1 != 0) write_IIC(0x00,0x00 );
-[e $ ! != -> . . _PORTAbits 0 1 `i -> 0 `i 174  ]
-[e ( _write_IIC (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[e $U 175  ]
+[e :U 175 ]
+[; ;main.c: 141: else if((PORTAbits.RA1 != 0) && (Initial_Flag == 1))
+[e $ ! && != -> . . _PORTAbits 0 1 `i -> 0 `i == -> _Initial_Flag `i -> 1 `i 177  ]
+[; ;main.c: 142: {
 "142
-[e :U 174 ]
-[; ;main.c: 142: else if((PORTAbits.RA1 != 0) && (Initial_Flag == 1))
-[e $ ! && != -> . . _PORTAbits 0 1 `i -> 0 `i == -> _Initial_Flag `i -> 1 `i 176  ]
-[; ;main.c: 143: {
+{
+[; ;main.c: 143: while(1)
 "143
-{
-[; ;main.c: 144: while(1)
+[e :U 179 ]
+[; ;main.c: 144: {
 "144
-[e :U 178 ]
-[; ;main.c: 145: {
-"145
 {
-[; ;main.c: 146: write_IIC(0x00,0x00 ); ;
-"146
+[; ;main.c: 145: write_IIC(0x00,0x00 ); ;
+"145
 [e ( _write_IIC (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+"146
+}
+[e :U 178 ]
+"143
+[e $U 179  ]
+[e :U 180 ]
 "147
 }
 [e :U 177 ]
-"144
-[e $U 178  ]
-[e :U 179 ]
 "148
-}
 [e :U 176 ]
-"149
-[e :U 175 ]
-[e :U 173 ]
+[e :U 174 ]
 }
 [e :U 138 ]
 "32
 [e $U 139  ]
 [e :U 140 ]
+[; ;main.c: 146: }
 [; ;main.c: 147: }
 [; ;main.c: 148: }
 [; ;main.c: 149: }
-[; ;main.c: 150: }
-"150
+"149
 [e :UE 137 ]
 }
-"152
+"151
 [v _The_Close `(v  1 ef ]
 {
-[; ;main.c: 151: void The_Close(void)
-[; ;main.c: 152: {
+[; ;main.c: 150: void The_Close(void)
+[; ;main.c: 151: {
 [e :U _The_Close ]
 [f ]
-[; ;main.c: 153: kai = 0;
-"153
+[; ;main.c: 152: kai = 0;
+"152
 [e = _kai -> -> 0 `i `uc ]
-[; ;main.c: 154: Stop_Flag = 0;
-"154
+[; ;main.c: 153: Stop_Flag = 0;
+"153
 [e = _Stop_Flag -> -> 0 `i `uc ]
-[; ;main.c: 155: Start_Flag = 0;
-"155
+[; ;main.c: 154: Start_Flag = 0;
+"154
 [e = _Start_Flag -> -> 0 `i `uc ]
-[; ;main.c: 156: Initial_Flag = 0;
-"156
+[; ;main.c: 155: Initial_Flag = 0;
+"155
 [e = _Initial_Flag -> -> 0 `i `uc ]
-[; ;main.c: 157: Work_Flag = 0;
-"157
+[; ;main.c: 156: Work_Flag = 0;
+"156
 [e = _Work_Flag -> -> 0 `i `uc ]
-[; ;main.c: 158: VOLT=1150;
-"158
+[; ;main.c: 157: VOLT=1150;
+"157
 [e = _VOLT -> -> 1150 `i `ui ]
-[; ;main.c: 159: Open_Cover_Flag = 0;
-"159
+[; ;main.c: 158: Open_Cover_Flag = 0;
+"158
 [e = _Open_Cover_Flag -> -> 0 `i `uc ]
-[; ;main.c: 160: Open_Cover_times = 0;
-"160
+[; ;main.c: 159: Open_Cover_times = 0;
+"159
 [e = _Open_Cover_times -> -> 0 `i `ui ]
-[; ;main.c: 161: PORTAbits.RA2 = 1;asm ("NOP");
-"161
+[; ;main.c: 160: PORTAbits.RA2 = 1;asm ("NOP");
+"160
 [e = . . _PORTAbits 0 2 -> -> 1 `i `uc ]
 [; NOP ;#
-[; ;main.c: 162: delaynms(10);
-"162
+[; ;main.c: 161: delaynms(10);
+"161
 [e ( _delaynms (1 -> -> 10 `i `ui ]
-[; ;main.c: 163: PORTAbits.RA2 = 0;asm ("NOP");
-"163
+[; ;main.c: 162: PORTAbits.RA2 = 0;asm ("NOP");
+"162
 [e = . . _PORTAbits 0 2 -> -> 0 `i `uc ]
 [; NOP ;#
-[; ;main.c: 164: Key_Run = 0;
-"164
+[; ;main.c: 163: Key_Run = 0;
+"163
 [e = _Key_Run -> -> 0 `i `uc ]
-[; ;main.c: 165: Once = 0;
-"165
+[; ;main.c: 164: Once = 0;
+"164
 [e = _Once -> -> 0 `i `uc ]
-[; ;main.c: 166: Forbid_input=0;
-"166
+[; ;main.c: 165: Forbid_input=0;
+"165
 [e = _Forbid_input -> -> 0 `i `uc ]
-[; ;main.c: 167: WDTCONbits.SWDTEN = 0;
-"167
+[; ;main.c: 166: WDTCONbits.SWDTEN = 0;
+"166
 [e = . . _WDTCONbits 0 0 -> -> 0 `i `uc ]
-[; ;main.c: 168: }
-"168
-[e :UE 180 ]
+[; ;main.c: 167: }
+"167
+[e :UE 181 ]
 }

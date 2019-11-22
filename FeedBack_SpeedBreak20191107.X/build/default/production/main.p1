@@ -2603,10 +2603,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U 145 ]
 "41
 [e :U 144 ]
-[; ;main.c: 41: for(i=0;i<70;i++)
+[; ;main.c: 41: for(i=0;i<100;i++)
 {
 [e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 70 `i 146  ]
+[e $ < -> _i `i -> 100 `i 146  ]
 [e $U 147  ]
 "42
 [e :U 146 ]
@@ -2619,23 +2619,23 @@ Version 3.2 HI-TECH Software Intermediate Code
 }
 "41
 [e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 70 `i 146  ]
+[e $ < -> _i `i -> 100 `i 146  ]
 [e :U 147 ]
 "44
 }
 [; ;main.c: 44: }
-[; ;main.c: 45: ADC_Val /=70;
+[; ;main.c: 45: ADC_Val /=100;
 "45
-[e =/ _ADC_Val -> -> 70 `uc `ui ]
+[e =/ _ADC_Val -> -> 100 `uc `ui ]
 [; ;main.c: 46: if(PORTAbits.RA5 == 1)
 "46
 [e $ ! == -> . . _PORTAbits 0 5 `i -> 1 `i 149  ]
 [; ;main.c: 47: {
 "47
 {
-[; ;main.c: 48: if(ADC_Val < 595) {PORTBbits.RB3 = 1;asm ("NOP");}
+[; ;main.c: 48: if(ADC_Val < 590) {PORTBbits.RB3 = 1;asm ("NOP");}
 "48
-[e $ ! < _ADC_Val -> -> 595 `i `ui 150  ]
+[e $ ! < _ADC_Val -> -> 590 `i `ui 150  ]
 {
 [e = . . _PORTBbits 0 3 -> -> 1 `i `uc ]
 [; NOP ;#
@@ -2643,16 +2643,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 151  ]
 "49
 [e :U 150 ]
-[; ;main.c: 49: else {PORTBbits.RB3 = 0;asm ("NOP");}
+[; ;main.c: 49: else if(ADC_Val > 595) {PORTBbits.RB3 = 0;asm ("NOP");}
+[e $ ! > _ADC_Val -> -> 595 `i `ui 152  ]
 {
 [e = . . _PORTBbits 0 3 -> -> 0 `i `uc ]
 [; NOP ;#
 }
-[e :U 151 ]
+[e :U 152 ]
 "50
+[e :U 151 ]
 }
 [; ;main.c: 50: }
-[e $U 152  ]
+[e $U 153  ]
 "51
 [e :U 149 ]
 [; ;main.c: 51: else
@@ -2661,7 +2663,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 {
 [; ;main.c: 53: if(ADC_Val< 510)
 "53
-[e $ ! < _ADC_Val -> -> 510 `i `ui 153  ]
+[e $ ! < _ADC_Val -> -> 510 `i `ui 154  ]
 [; ;main.c: 54: {
 "54
 {
@@ -2682,34 +2684,34 @@ Version 3.2 HI-TECH Software Intermediate Code
 "59
 }
 [; ;main.c: 59: }
-[e $U 154  ]
+[e $U 155  ]
 "60
-[e :U 153 ]
-[; ;main.c: 60: else if((ADC_Val >= 510) && (ADC_Val <595)) {PORTBbits.RB3 = 1;asm ("NOP");}
-[e $ ! && >= _ADC_Val -> -> 510 `i `ui < _ADC_Val -> -> 595 `i `ui 155  ]
-{
-[e = . . _PORTBbits 0 3 -> -> 1 `i `uc ]
-[; NOP ;#
-}
-[e $U 156  ]
-"61
-[e :U 155 ]
-[; ;main.c: 61: else if(ADC_Val >= 595) {PORTBbits.RB3 = 0;asm ("NOP");}
-[e $ ! >= _ADC_Val -> -> 595 `i `ui 157  ]
+[e :U 154 ]
+[; ;main.c: 60: else if((ADC_Val >= 510) && (ADC_Val <595)) {PORTBbits.RB3 = 0;asm ("NOP");}
+[e $ ! && >= _ADC_Val -> -> 510 `i `ui < _ADC_Val -> -> 595 `i `ui 156  ]
 {
 [e = . . _PORTBbits 0 3 -> -> 0 `i `uc ]
 [; NOP ;#
 }
-[e :U 157 ]
-"62
+[e $U 157  ]
+"61
 [e :U 156 ]
-[e :U 154 ]
+[; ;main.c: 61: else if(ADC_Val >= 600) {PORTBbits.RB3 = 0;asm ("NOP");}
+[e $ ! >= _ADC_Val -> -> 600 `i `ui 158  ]
+{
+[e = . . _PORTBbits 0 3 -> -> 0 `i `uc ]
+[; NOP ;#
 }
-[e :U 152 ]
+[e :U 158 ]
+"62
+[e :U 157 ]
+[e :U 155 ]
+}
+[e :U 153 ]
 [; ;main.c: 62: }
 [; ;main.c: 65: if((Onekey_Flag == 1) &&(Work_Flag == 0))
 "65
-[e $ ! && == -> _Onekey_Flag `i -> 1 `i == -> _Work_Flag `i -> 0 `i 158  ]
+[e $ ! && == -> _Onekey_Flag `i -> 1 `i == -> _Work_Flag `i -> 0 `i 159  ]
 [; ;main.c: 66: {
 "66
 {
@@ -2730,11 +2732,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _Not_two -> -> 1 `i `uc ]
 "71
 }
-[e :U 158 ]
+[e :U 159 ]
 [; ;main.c: 71: }
 [; ;main.c: 72: if((Onekey_Flag == 2) && (Work_Flag == 0))
 "72
-[e $ ! && == -> _Onekey_Flag `i -> 2 `i == -> _Work_Flag `i -> 0 `i 159  ]
+[e $ ! && == -> _Onekey_Flag `i -> 2 `i == -> _Work_Flag `i -> 0 `i 160  ]
 [; ;main.c: 73: {
 "73
 {
@@ -2769,17 +2771,17 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _Onekey_Flag -> -> 0 `i `uc ]
 "82
 }
-[e :U 159 ]
+[e :U 160 ]
 [; ;main.c: 82: }
 [; ;main.c: 84: if((PORTAbits.RA1 == 0) && (Not_two == 1))
 "84
-[e $ ! && == -> . . _PORTAbits 0 1 `i -> 0 `i == -> _Not_two `i -> 1 `i 160  ]
+[e $ ! && == -> . . _PORTAbits 0 1 `i -> 0 `i == -> _Not_two `i -> 1 `i 161  ]
 [; ;main.c: 85: {
 "85
 {
 [; ;main.c: 86: if(Key_Run == 1)
 "86
-[e $ ! == -> _Key_Run `i -> 1 `i 161  ]
+[e $ ! == -> _Key_Run `i -> 1 `i 162  ]
 [; ;main.c: 87: {
 "87
 {
@@ -2791,8 +2793,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; clrwdt ;#
 [; ;main.c: 90: while(Initial_Flag == 0)
 "90
-[e $U 162  ]
-[e :U 163 ]
+[e $U 163  ]
+[e :U 164 ]
 [; ;main.c: 91: {
 "91
 {
@@ -2822,17 +2824,17 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _kai -> -> 1 `i `uc ]
 [; ;main.c: 100: break;
 "100
-[e $U 164  ]
+[e $U 165  ]
 "101
 }
-[e :U 162 ]
+[e :U 163 ]
 "90
-[e $ == -> _Initial_Flag `i -> 0 `i 163  ]
-[e :U 164 ]
+[e $ == -> _Initial_Flag `i -> 0 `i 164  ]
+[e :U 165 ]
 [; ;main.c: 101: }
 [; ;main.c: 102: if((Start_Flag == 0)&&(kai == 1))
 "102
-[e $ ! && == -> _Start_Flag `i -> 0 `i == -> _kai `i -> 1 `i 165  ]
+[e $ ! && == -> _Start_Flag `i -> 0 `i == -> _kai `i -> 1 `i 166  ]
 [; ;main.c: 103: {
 "103
 {
@@ -2845,11 +2847,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 "106
 }
 [; ;main.c: 106: }
-[e $U 166  ]
+[e $U 167  ]
 "107
-[e :U 165 ]
+[e :U 166 ]
 [; ;main.c: 107: else if(Stop_Flag == 1)
-[e $ ! == -> _Stop_Flag `i -> 1 `i 167  ]
+[e $ ! == -> _Stop_Flag `i -> 1 `i 168  ]
 [; ;main.c: 108: {
 "108
 {
@@ -2858,7 +2860,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _Open_Cover_Flag -> -> 1 `i `uc ]
 [; ;main.c: 110: if(Once == 0)
 "110
-[e $ ! == -> _Once `i -> 0 `i 168  ]
+[e $ ! == -> _Once `i -> 0 `i 169  ]
 [; ;main.c: 111: {
 "111
 {
@@ -2873,14 +2875,14 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _Forbid_input -> -> 1 `i `uc ]
 "115
 }
-[e :U 168 ]
+[e :U 169 ]
 [; ;main.c: 115: }
 [; ;main.c: 116: Count_Flag=0;
 "116
 [e = _Count_Flag -> -> 0 `i `uc ]
 [; ;main.c: 117: if(Open_Cover_times >= 2700)
 "117
-[e $ ! >= _Open_Cover_times -> -> 2700 `i `ui 169  ]
+[e $ ! >= _Open_Cover_times -> -> 2700 `i `ui 170  ]
 [; ;main.c: 118: {
 "118
 {
@@ -2889,21 +2891,21 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _The_Close ..  ]
 "120
 }
-[e :U 169 ]
+[e :U 170 ]
 "121
 }
-[e :U 167 ]
+[e :U 168 ]
 "122
-[e :U 166 ]
+[e :U 167 ]
 }
 [; ;main.c: 120: }
 [; ;main.c: 121: }
 [; ;main.c: 122: }
-[e $U 170  ]
+[e $U 171  ]
 "123
-[e :U 161 ]
+[e :U 162 ]
 [; ;main.c: 123: else if(Key_Run == 2)
-[e $ ! == -> _Key_Run `i -> 2 `i 171  ]
+[e $ ! == -> _Key_Run `i -> 2 `i 172  ]
 [; ;main.c: 124: {
 "124
 {
@@ -2918,7 +2920,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _Forbid_input -> -> 1 `i `uc ]
 [; ;main.c: 128: if(Once == 0)
 "128
-[e $ ! == -> _Once `i -> 0 `i 172  ]
+[e $ ! == -> _Once `i -> 0 `i 173  ]
 [; ;main.c: 129: {
 "129
 {
@@ -2930,14 +2932,14 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _Once -> -> 1 `i `uc ]
 "132
 }
-[e :U 172 ]
+[e :U 173 ]
 [; ;main.c: 132: }
 [; ;main.c: 133: Count_Flag=0;
 "133
 [e = _Count_Flag -> -> 0 `i `uc ]
 [; ;main.c: 134: if(Open_Cover_times >= 2700)
 "134
-[e $ ! >= _Open_Cover_times -> -> 2700 `i `ui 173  ]
+[e $ ! >= _Open_Cover_times -> -> 2700 `i `ui 174  ]
 [; ;main.c: 135: {
 "135
 {
@@ -2946,33 +2948,33 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _The_Close ..  ]
 "137
 }
-[e :U 173 ]
+[e :U 174 ]
 "138
 }
-[e :U 171 ]
+[e :U 172 ]
 "139
-[e :U 170 ]
+[e :U 171 ]
 }
 [; ;main.c: 137: }
 [; ;main.c: 138: }
 [; ;main.c: 139: }
-[e $U 174  ]
+[e $U 175  ]
 "140
-[e :U 160 ]
+[e :U 161 ]
 [; ;main.c: 140: else if (PORTAbits.RA1 != 0) write_IIC(0x00,0x00 );
-[e $ ! != -> . . _PORTAbits 0 1 `i -> 0 `i 175  ]
+[e $ ! != -> . . _PORTAbits 0 1 `i -> 0 `i 176  ]
 [e ( _write_IIC (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[e $U 176  ]
+[e $U 177  ]
 "141
-[e :U 175 ]
+[e :U 176 ]
 [; ;main.c: 141: else if((PORTAbits.RA1 != 0) && (Initial_Flag == 1))
-[e $ ! && != -> . . _PORTAbits 0 1 `i -> 0 `i == -> _Initial_Flag `i -> 1 `i 177  ]
+[e $ ! && != -> . . _PORTAbits 0 1 `i -> 0 `i == -> _Initial_Flag `i -> 1 `i 178  ]
 [; ;main.c: 142: {
 "142
 {
 [; ;main.c: 143: while(1)
 "143
-[e :U 179 ]
+[e :U 180 ]
 [; ;main.c: 144: {
 "144
 {
@@ -2981,16 +2983,16 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _write_IIC (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
 "146
 }
-[e :U 178 ]
+[e :U 179 ]
 "143
-[e $U 179  ]
-[e :U 180 ]
+[e $U 180  ]
+[e :U 181 ]
 "147
 }
-[e :U 177 ]
+[e :U 178 ]
 "148
-[e :U 176 ]
-[e :U 174 ]
+[e :U 177 ]
+[e :U 175 ]
 }
 [e :U 138 ]
 "32
@@ -3059,5 +3061,5 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = . . _WDTCONbits 0 0 -> -> 0 `i `uc ]
 [; ;main.c: 167: }
 "167
-[e :UE 181 ]
+[e :UE 182 ]
 }

@@ -1568,15 +1568,15 @@ else {PORTBbits.RB2 = 0;asm ("NOP");}
 if((Count_Flag == 0) && (Work_Flag == 1)) {PORTBbits.RB0 = 1;asm ("NOP");}
 else if(Key_Run == 0 ) {PORTBbits.RB0 = 0;asm ("NOP");}
 
-for(i=0;i<70;i++)
+for(i=0;i<100;i++)
 {
 ADC_Val += ReadADC(3);
 }
-ADC_Val /=70;
+ADC_Val /=100;
 if(PORTAbits.RA5 == 1)
 {
-if(ADC_Val < 595) {PORTBbits.RB3 = 1;asm ("NOP");}
-else {PORTBbits.RB3 = 0;asm ("NOP");}
+if(ADC_Val < 590) {PORTBbits.RB3 = 1;asm ("NOP");}
+else if(ADC_Val > 595) {PORTBbits.RB3 = 0;asm ("NOP");}
 }
 else
 {
